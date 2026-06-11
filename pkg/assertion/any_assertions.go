@@ -32,3 +32,17 @@ func (a *AnyAssertion) IsSameAs(other any) *AnyAssertion {
 	}
 	return a
 }
+
+func (a *AnyAssertion) IsNotEqualTo(other any) *AnyAssertion {
+	if reflect.DeepEqual(a.value, other) {
+		a.sink.Fail(fmt.Sprintf("expected %v to not equal %v", a.value, other))
+	}
+	return a
+}
+
+func (a *AnyAssertion) IsNotSameAs(other any) *AnyAssertion {
+	if a.value == other {
+		a.sink.Fail(fmt.Sprintf("expected different reference but got same %v", a.value))
+	}
+	return a
+}
