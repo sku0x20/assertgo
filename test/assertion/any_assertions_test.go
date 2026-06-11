@@ -26,6 +26,44 @@ func Test_AnyAssertion_IsEqualTo(t *testing.T) {
 	})
 }
 
+func Test_AnyAssertion_IsNil(t *testing.T) {
+	t.Run("pass", func(t *testing.T) {
+		mock, sink := agtest.NewSink()
+		a := assertion.NewAnyAssertion(sink, nil)
+		a.IsNil()
+		if mock.FatalCalled {
+			t.Fatal("expected no failure")
+		}
+	})
+	t.Run("fail", func(t *testing.T) {
+		mock, sink := agtest.NewSink()
+		a := assertion.NewAnyAssertion(sink, "hello")
+		a.IsNil()
+		if !mock.FatalCalled {
+			t.Fatal("expected failure")
+		}
+	})
+}
+
+func Test_AnyAssertion_IsNotNil(t *testing.T) {
+	t.Run("pass", func(t *testing.T) {
+		mock, sink := agtest.NewSink()
+		a := assertion.NewAnyAssertion(sink, "hello")
+		a.IsNotNil()
+		if mock.FatalCalled {
+			t.Fatal("expected no failure")
+		}
+	})
+	t.Run("fail", func(t *testing.T) {
+		mock, sink := agtest.NewSink()
+		a := assertion.NewAnyAssertion(sink, nil)
+		a.IsNotNil()
+		if !mock.FatalCalled {
+			t.Fatal("expected failure")
+		}
+	})
+}
+
 func Test_AnyAssertion_IsNotEqualTo(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
