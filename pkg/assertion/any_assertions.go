@@ -1,9 +1,6 @@
 package assertion
 
 import (
-	"fmt"
-	"reflect"
-
 	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 	"github.com/sku0x20/assertgo/pkg/sink"
@@ -24,9 +21,7 @@ func NewAnyAssertion(s *sink.TSink, value any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsEqualTo(other any) *AnyAssertion {
-	if !reflect.DeepEqual(a.value, other) {
-		a.sink.Fail(fmt.Sprintf("expected %v but got %v", other, a.value))
-	}
+	a.asserter.Assert(matcher.NewDeepEqualMatcher(other))
 	return a
 }
 
@@ -36,9 +31,7 @@ func (a *AnyAssertion) IsSameAs(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsNotEqualTo(other any) *AnyAssertion {
-	if reflect.DeepEqual(a.value, other) {
-		a.sink.Fail(fmt.Sprintf("expected %v to not equal %v", a.value, other))
-	}
+	a.asserter.Assert(matcher.NewNotMatcher[any](matcher.NewDeepEqualMatcher(other)))
 	return a
 }
 
