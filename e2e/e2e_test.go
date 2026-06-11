@@ -8,10 +8,15 @@ type mockT struct {
 	failed bool
 }
 
-func (m *mockT) Fail() { m.failed = true }
+func (m *mockT) Fail()    { m.failed = true }
+func (m *mockT) FailNow() { m.failed = true }
 
 func Test_FailHard(t *testing.T) {
-	T(t)
+	mock := &mockT{}
+	T(mock)
+	if !mock.failed {
+		t.Fatal("should have failed")
+	}
 }
 
 func Test_FailSoft(t *testing.T) {

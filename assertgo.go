@@ -3,7 +3,7 @@ package assertgo
 import "testing"
 
 func T(t testing.TB) {
-	t.Fail()
+	t.FailNow()
 }
 
 func Ts(t testing.TB) {
