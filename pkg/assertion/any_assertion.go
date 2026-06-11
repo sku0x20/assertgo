@@ -13,6 +13,11 @@ func NewAnyAssertion(ma *matcherasserter.MatcherAsserter[any]) *AnyAssertion {
 	return &AnyAssertion{asserter: ma}
 }
 
+func (a *AnyAssertion) Not() *AnyAssertion {
+	a.asserter.Chain(matcher.NewNotMatcher[any](nil))
+	return a
+}
+
 func (a *AnyAssertion) EqualTo(other any) *AnyAssertion {
 	a.asserter.Assert(matcher.NewDeepEqualMatcher(other))
 	return a
