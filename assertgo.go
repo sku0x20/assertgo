@@ -7,7 +7,7 @@ import (
 )
 
 func T(t testing.TB) {
-	sink := pkg.NewFailSink(t)
+	sink := pkg.NewTSink(t)
 	sink.Fail("failed")
 }
 

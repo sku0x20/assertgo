@@ -6,9 +6,9 @@ import (
 	"github.com/sku0x20/assertgo/pkg"
 )
 
-func Test_FailSink_Fail(t *testing.T) {
+func Test_TSink_Fail(t *testing.T) {
 	mock := &MockT{}
-	sink := pkg.NewFailSink(mock)
+	sink := pkg.NewTSink(mock)
 	sink.Fail("something went wrong")
 	if !mock.FatalCalled {
 		t.Fatal("expected Fatal to be called")
