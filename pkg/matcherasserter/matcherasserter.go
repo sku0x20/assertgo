@@ -5,17 +5,22 @@ import (
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
+type lazyMatcher[T any] interface {
+	matcher.Matcher[T]
+	matcher.LazyExpected[T]
+}
+
 type MatcherAsserter[T any] struct {
 	sink  *sink.TSink
 	value T
-	chain matcher.LazyMatcher[T]
+	chain lazyMatcher[T]
 }
 
 func New[T any](s *sink.TSink, value T) *MatcherAsserter[T] {
 	return &MatcherAsserter[T]{sink: s, value: value}
 }
 
-func (ma *MatcherAsserter[T]) Chain(m matcher.LazyMatcher[T]) {
+func (ma *MatcherAsserter[T]) Chain(m lazyMatcher[T]) {
 	ma.chain = m
 }
 
