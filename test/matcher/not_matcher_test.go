@@ -6,19 +6,6 @@ import (
 	"github.com/sku0x20/assertgo/pkg/matcher"
 )
 
-type mockMatcher struct {
-	matchResult bool
-	failureMsg  string
-}
-
-func (m *mockMatcher) Match(_ any) bool {
-	return m.matchResult
-}
-
-func (m *mockMatcher) FailureMsg(_ any) string {
-	return m.failureMsg
-}
-
 func Test_NotMatcher_Match(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		m := matcher.NewNotMatcher[any](&mockMatcher{matchResult: false})
