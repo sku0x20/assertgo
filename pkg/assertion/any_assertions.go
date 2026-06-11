@@ -27,7 +27,6 @@ func (a *AnyAssertion) IsEqualTo(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsSameAs(other any) *AnyAssertion {
-	NewReferenceAssert(a.sink, a.value, other).IsSameAs()
 	return a
 }
 
@@ -39,7 +38,6 @@ func (a *AnyAssertion) IsNotEqualTo(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsNotSameAs(other any) *AnyAssertion {
-	NewReferenceAssert(a.sink, a.value, other).IsNotSameAs()
 	return a
 }
 
