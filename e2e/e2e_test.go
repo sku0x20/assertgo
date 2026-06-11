@@ -12,6 +12,6 @@ func Test_Fail(tt *testing.T) {
 	//T(t).Assert("10").isEqualTo("9")
 	T(t)
 	if !t.FatalCalled {
-		t.Fatal("should have called FailNow")
+		tt.Fatal("should have called FailNow")
 	}
 }
