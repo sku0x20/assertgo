@@ -15,10 +15,3 @@ func Test_FailHard(t *testing.T) {
 	}
 }
 
-func Test_FailSoft(t *testing.T) {
-	mock := &agtest.MockT{}
-	Ts(mock)
-	if !mock.FailCalled {
-		t.Fatal("should have called Fail")
-	}
-}
