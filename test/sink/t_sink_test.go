@@ -1,13 +1,14 @@
-package test
+package sink
 
 import (
 	"testing"
 
 	"github.com/sku0x20/assertgo/pkg/sink"
+	agtest "github.com/sku0x20/assertgo/test"
 )
 
 func Test_TSink_Fail(t *testing.T) {
-	mock := &MockT{}
+	mock := &agtest.MockT{}
 	s := sink.NewTSink(mock)
 	s.Fail("something went wrong")
 	if !mock.FatalCalled {
