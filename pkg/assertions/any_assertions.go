@@ -3,20 +3,18 @@ package assertions
 import (
 	"fmt"
 	"reflect"
+
+	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
-type Sink interface {
-	Fail(msg string)
-}
-
 type AnyAssertions struct {
-	sink  Sink
+	sink  *sink.TSink
 	value any
 }
 
-func NewAnyAssertions(sink Sink, value any) *AnyAssertions {
+func NewAnyAssertions(s *sink.TSink, value any) *AnyAssertions {
 	return &AnyAssertions{
-		sink:  sink,
+		sink:  s,
 		value: value,
 	}
 }

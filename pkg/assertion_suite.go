@@ -1,13 +1,16 @@
 package pkg
 
-import "github.com/sku0x20/assertgo/pkg/assertions"
+import (
+	"github.com/sku0x20/assertgo/pkg/assertions"
+	"github.com/sku0x20/assertgo/pkg/sink"
+)
 
 type AssertionSuite struct {
-	sink *TSink
+	sink *sink.TSink
 }
 
-func NewAssertionSuite(sink *TSink) *AssertionSuite {
-	return &AssertionSuite{sink: sink}
+func NewAssertionSuite(s *sink.TSink) *AssertionSuite {
+	return &AssertionSuite{sink: s}
 }
 
 func (a *AssertionSuite) Assert(value any) *assertions.AnyAssertions {
