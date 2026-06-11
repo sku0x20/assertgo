@@ -28,3 +28,11 @@ func Test_NotMatcher_FailureMsg(t *testing.T) {
 		t.Fatal("expected failure message to be prefixed with 'not: '")
 	}
 }
+
+func Test_NotMatcher_Set(t *testing.T) {
+	m := matcher.NewNotMatcher[any](&MockMatcher{MatchResult: true})
+	m.Set(&MockMatcher{MatchResult: false})
+	if !m.Match(nil) {
+		t.Fatal("expected match to be true after Set")
+	}
+}
