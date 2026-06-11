@@ -9,6 +9,7 @@
 ## Token & Context Hygiene
 
 - **Lean commits:** After each edit, stage only the changed files by name and commit immediately. Write the message from what you just changed — do NOT run `git diff`, `git log`, or `git status` first.
+- **User-triggered commits:** When the user says "commit", run `git status` first to catch any changes they made, then stage and commit everything.
 - **Don't re-read files in context:** If a file was already read this session, use it — don't re-read it.
 - **Compact proactively:** Once a decision is reached, `/compact` immediately — carry forward only the decision, not the back-and-forth. Use `/clear` when prior context won't help the next task at all.
 - **Cache awareness:** Prompt cache TTL is 5 minutes. Keep turns within that window to avoid cache misses. Cached context costs far fewer tokens.
