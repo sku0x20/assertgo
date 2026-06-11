@@ -1,4 +1,4 @@
-package test
+package matcher
 
 type MockMatcher struct {
 	MatchResult bool
