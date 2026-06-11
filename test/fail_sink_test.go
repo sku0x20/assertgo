@@ -7,13 +7,13 @@ import (
 )
 
 func Test_FailSink_Fail(t *testing.T) {
-	mock := &mockT{}
+	mock := &MockT{}
 	sink := pkg.NewFailSink(mock)
 	sink.Fail("something went wrong")
-	if !mock.fatalCalled {
+	if !mock.FatalCalled {
 		t.Fatal("expected Fatal to be called")
 	}
-	if mock.fatalMsg != "something went wrong" {
-		t.Fatalf("expected message 'something went wrong', got '%s'", mock.fatalMsg)
+	if mock.FatalMsg != "something went wrong" {
+		t.Fatalf("expected message 'something went wrong', got '%s'", mock.FatalMsg)
 	}
 }
