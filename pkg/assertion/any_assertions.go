@@ -24,3 +24,9 @@ func (a *AnyAssertion) IsEqualTo(other any) {
 		a.sink.Fail(fmt.Sprintf("expected %v but got %v", other, a.value))
 	}
 }
+
+func (a *AnyAssertion) IsSameAs(other any) {
+	if a.value != other {
+		a.sink.Fail(fmt.Sprintf("expected same reference as %v but got %v", other, a.value))
+	}
+}
