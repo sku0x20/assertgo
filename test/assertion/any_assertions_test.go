@@ -27,7 +27,7 @@ func Test_AnyAssertion_IsEqualTo_fail(t *testing.T) {
 
 func Test_AnyAssertion_IsSameAs_pass(t *testing.T) {
 	mock, sink := agtest.NewSink()
-	obj := &struct{}{}
+	obj := new(int)
 	a := assertion.NewAnyAssertion(sink, obj)
 	a.IsSameAs(obj)
 	if mock.FatalCalled {
@@ -37,8 +37,8 @@ func Test_AnyAssertion_IsSameAs_pass(t *testing.T) {
 
 func Test_AnyAssertion_IsSameAs_fail(t *testing.T) {
 	mock, sink := agtest.NewSink()
-	a := assertion.NewAnyAssertion(sink, &struct{}{})
-	a.IsSameAs(&struct{}{})
+	a := assertion.NewAnyAssertion(sink, new(int))
+	a.IsSameAs(new(int))
 	if !mock.FatalCalled {
 		t.Fatal("expected failure")
 	}
