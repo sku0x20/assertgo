@@ -4,21 +4,39 @@ import (
 	"testing"
 
 	"github.com/sku0x20/assertgo/pkg/matcher"
-	"github.com/sku0x20/assertgo/pkg/matcher/reference"
 )
+
+type mockMatcher struct {
+	matchResult bool
+	failureMsg  string
+}
+
+func (m *mockMatcher) Match(_ any) bool {
+	return m.matchResult
+}
+
+func (m *mockMatcher) FailureMsg(_ any) string {
+	return m.failureMsg
+}
 
 func Test_NotMatcher_Match(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
-		m := matcher.NewNotMatcher(reference.NewSameReferenceMatcher(new(int)))
-		if !m.Match(new(int)) {
+		m := matcher.NewNotMatcher[any](&mockMatcher{matchResult: false})
+		if !m.Match(nil) {
 			t.Fatal("expected match to be true")
 		}
 	})
 	t.Run("fail", func(t *testing.T) {
-		obj := new(int)
-		m := matcher.NewNotMatcher(reference.NewSameReferenceMatcher(obj))
-		if m.Match(obj) {
+		m := matcher.NewNotMatcher[any](&mockMatcher{matchResult: true})
+		if m.Match(nil) {
 			t.Fatal("expected match to be false")
 		}
 	})
+}
+
+func Test_NotMatcher_FailureMsg(t *testing.T) {
+	m := matcher.NewNotMatcher[any](&mockMatcher{failureMsg: "some failure"})
+	if m.FailureMsg(nil) != "some failure" {
+		t.Fatal("expected failure message to be delegated to inner matcher")
+	}
 }
