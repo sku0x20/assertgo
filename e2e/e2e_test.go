@@ -9,8 +9,7 @@ import (
 
 func Test_Fail(tt *testing.T) {
 	t := &agtest.MockT{}
-	//T(t).Assert("10").isEqualTo("9")
-	T(t)
+	T(t).Assert("10").IsEqualTo("9")
 	if !t.FatalCalled {
 		tt.Fatal("should have called FailNow")
 	}
