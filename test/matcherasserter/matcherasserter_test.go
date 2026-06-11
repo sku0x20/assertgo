@@ -26,24 +26,16 @@ func Test_MatcherAsserter_fail(t *testing.T) {
 }
 
 func Test_MatcherAsserter_Chain(t *testing.T) {
-	t.Run("chain wraps matcher", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		ma := matcherasserter.New[any](sink, nil)
-		ma.Chain(matcher.NewNotMatcher[any](nil))
-		ma.Assert(&testmatcher.MockMatcher{MatchResult: true})
-		if !mock.FatalCalled {
-			t.Fatal("expected failure: NotMatcher should negate the passing matcher")
-		}
-	})
-	t.Run("chain is cleared after assert", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		ma := matcherasserter.New[any](sink, nil)
-		ma.Chain(matcher.NewNotMatcher[any](nil))
-		ma.Assert(&testmatcher.MockMatcher{MatchResult: true})
-		mock.FatalCalled = false
-		ma.Assert(&testmatcher.MockMatcher{MatchResult: true})
-		if mock.FatalCalled {
-			t.Fatal("expected no failure: chain should be cleared after first assert")
-		}
-	})
+	mock, sink := agtest.NewSink()
+	ma := matcherasserter.New[any](sink, nil)
+	ma.Chain(matcher.NewNotMatcher[any](nil))
+	ma.Assert(&testmatcher.MockMatcher{MatchResult: true})
+	if !mock.FatalCalled {
+		t.Fatal("expected failure: NotMatcher should negate the passing matcher")
+	}
+	mock.FatalCalled = false
+	ma.Assert(&testmatcher.MockMatcher{MatchResult: true})
+	if mock.FatalCalled {
+		t.Fatal("expected no failure: chain should be cleared after first assert")
+	}
 }
