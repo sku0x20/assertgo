@@ -14,6 +14,8 @@ func New(s *sink.TSink) *AssertionSuit {
 	return &AssertionSuit{sink: s}
 }
 
+// todo: use generic method in golang 1.27
+
 func (a *AssertionSuit) Assert(value any) *assertion.Assertion[any] {
 	return assertion.New(matcherasserter.New(a.sink, value))
 }
