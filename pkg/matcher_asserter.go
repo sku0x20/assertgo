@@ -5,8 +5,17 @@ import (
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
-func MatcherAsserter[T any](s *sink.TSink, m matcher.Matcher[T], value T) {
-	if !m.Match(value) {
-		s.Fail(m.FailureMsg(value))
+type MatcherAsserter struct {
+	sink  *sink.TSink
+	value any
+}
+
+func NewMatcherAsserter(s *sink.TSink, value any) *MatcherAsserter {
+	return &MatcherAsserter{sink: s, value: value}
+}
+
+func (ma *MatcherAsserter) Assert(m matcher.Matcher[any]) {
+	if !m.Match(ma.value) {
+		ma.sink.Fail(m.FailureMsg(ma.value))
 	}
 }
