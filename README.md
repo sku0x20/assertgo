@@ -1,4 +1,4 @@
-# assertgo
+# AssertGo
 
 A simple assertion library for Go.
 
@@ -18,10 +18,3 @@ func TestSomething(t *testing.T) {
 }
 ```
 
-`T(t)` returns an `AssertionSuite`. Call `Assert(value)` to get an `AnyAssertion`, then chain assertion methods.
-
-## Assertions
-
-| Method | Description |
-|---|---|
-| `IsEqualTo(other)` | Fails if value does not equal other |
