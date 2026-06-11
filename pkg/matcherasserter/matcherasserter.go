@@ -6,8 +6,9 @@ import (
 )
 
 type MatcherAsserter struct {
-	sink  *sink.TSink
-	value any
+	sink            *sink.TSink
+	value           any
+	previousMatcher matcher.Matcher[any]
 }
 
 func New(s *sink.TSink, value any) *MatcherAsserter {
