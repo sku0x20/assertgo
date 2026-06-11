@@ -1,5 +1,7 @@
 # AssertGo
 
+[![CI](https://github.com/sku0x20/assertgo/actions/workflows/ci.yaml/badge.svg)](https://github.com/sku0x20/assertgo/actions/workflows/ci.yaml)
+
 A simple assertion library for Go.
 
 ## Installation
