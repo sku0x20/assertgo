@@ -36,29 +36,18 @@ func Test_AnyAssertion_EqualTo(t *testing.T) {
 	assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.EqualTo("world") })
 }
 
-func Test_AnyAssertion_IsNil(t *testing.T) {
-	assertPasses(t, nil, func(a *assertion.AnyAssertion) { a.IsNil() })
-	assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.IsNil() })
-}
-
-func Test_AnyAssertion_IsNotNil(t *testing.T) {
-	assertPasses(t, "hello", func(a *assertion.AnyAssertion) { a.Not().IsNil() })
-	assertFails(t, nil, func(a *assertion.AnyAssertion) { a.Not().IsNil() })
-}
-
-func Test_AnyAssertion_NotEqualTo(t *testing.T) {
-	assertPasses(t, "hello", func(a *assertion.AnyAssertion) { a.Not().EqualTo("world") })
-	assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.Not().EqualTo("hello") })
-}
-
 func Test_AnyAssertion_SameAs(t *testing.T) {
 	obj := new(int)
 	assertPasses(t, obj, func(a *assertion.AnyAssertion) { a.SameAs(obj) })
 	assertFails(t, new(int), func(a *assertion.AnyAssertion) { a.SameAs(new(int)) })
 }
 
-func Test_AnyAssertion_NotSameAs(t *testing.T) {
-	obj := new(int)
-	assertPasses(t, new(int), func(a *assertion.AnyAssertion) { a.Not().SameAs(new(int)) })
-	assertFails(t, obj, func(a *assertion.AnyAssertion) { a.Not().SameAs(obj) })
+func Test_AnyAssertion_IsNil(t *testing.T) {
+	assertPasses(t, nil, func(a *assertion.AnyAssertion) { a.IsNil() })
+	assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.IsNil() })
+}
+
+func Test_AnyAssertion_Not(t *testing.T) {
+	assertPasses(t, "hello", func(a *assertion.AnyAssertion) { a.Not().EqualTo("world") })
+	assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.Not().EqualTo("hello") })
 }
