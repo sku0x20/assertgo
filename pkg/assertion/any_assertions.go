@@ -10,14 +10,16 @@ import (
 )
 
 type AnyAssertion struct {
-	sink  *sink.TSink
-	value any
+	sink     *sink.TSink
+	value    any
+	asserter *matcherasserter.MatcherAsserter
 }
 
 func NewAnyAssertion(s *sink.TSink, value any) *AnyAssertion {
 	return &AnyAssertion{
-		sink:  s,
-		value: value,
+		sink:     s,
+		value:    value,
+		asserter: matcherasserter.New(s, value),
 	}
 }
 
@@ -29,7 +31,7 @@ func (a *AnyAssertion) IsEqualTo(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsSameAs(other any) *AnyAssertion {
-	matcherasserter.New(a.sink, a.value).Assert(matcher.NewReferenceMatcher(other))
+	a.asserter.Assert(matcher.NewReferenceMatcher(other))
 	return a
 }
 
@@ -41,7 +43,7 @@ func (a *AnyAssertion) IsNotEqualTo(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsNotSameAs(other any) *AnyAssertion {
-	matcherasserter.New(a.sink, a.value).Assert(matcher.NewNotMatcher[any](matcher.NewReferenceMatcher(other)))
+	a.asserter.Assert(matcher.NewNotMatcher[any](matcher.NewReferenceMatcher(other)))
 	return a
 }
 
