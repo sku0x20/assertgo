@@ -67,14 +67,14 @@ func Test_AnyAssertion_IsNotNil(t *testing.T) {
 func Test_AnyAssertion_NotEqualTo(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").NotEqualTo("world")
+		newAssertion(sink, "hello").Not().EqualTo("world")
 		if mock.FatalCalled {
 			t.Fatal("expected no failure")
 		}
 	})
 	t.Run("fail", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").NotEqualTo("hello")
+		newAssertion(sink, "hello").Not().EqualTo("hello")
 		if !mock.FatalCalled {
 			t.Fatal("expected failure")
 		}
