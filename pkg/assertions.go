@@ -1,9 +1,9 @@
 package pkg
 
-type Assertions struct {
+type AssertionSuite struct {
 	sink *TSink
 }
 
-func NewAssertions(sink *TSink) *Assertions {
-	return &Assertions{sink: sink}
+func NewAssertionSuite(sink *TSink) *AssertionSuite {
+	return &AssertionSuite{sink: sink}
 }

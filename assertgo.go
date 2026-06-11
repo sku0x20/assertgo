@@ -6,10 +6,9 @@ import (
 	"github.com/sku0x20/assertgo/pkg"
 )
 
-func T(t testing.TB) *pkg.Assertions {
+func T(t testing.TB) *pkg.AssertionSuite {
 	sink := pkg.NewTSink(t)
-	assertions := pkg.NewAssertions(sink)
-	return assertions
+	return pkg.NewAssertionSuite(sink)
 }
 
 // func Ts(t testing.TB) {}
