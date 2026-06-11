@@ -32,3 +32,8 @@ func (a *Assertion[V]) IsNil() *Assertion[V] {
 	a.asserter.Assert(matcher.NewNilMatcher[V]())
 	return a
 }
+
+func (a *Assertion[V]) Matches(m matcher.Matcher[V]) *Assertion[V] {
+	a.asserter.Assert(m)
+	return a
+}
