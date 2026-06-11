@@ -48,27 +48,11 @@ func (a *AnyAssertion) IsNotSameAs(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsNil() *AnyAssertion {
-	if !isNil(a.value) {
-		a.sink.Fail(fmt.Sprintf("expected nil but got %v", a.value))
-	}
+	a.asserter.Assert(matcher.NewNilMatcher())
 	return a
 }
 
 func (a *AnyAssertion) IsNotNil() *AnyAssertion {
-	if isNil(a.value) {
-		a.sink.Fail(fmt.Sprintf("expected not nil but got nil"))
-	}
+	a.asserter.Assert(matcher.NewNotMatcher[any](matcher.NewNilMatcher()))
 	return a
-}
-
-func isNil(v any) bool {
-	if v == nil {
-		return true
-	}
-	rv := reflect.ValueOf(v)
-	switch rv.Kind() {
-	case reflect.Ptr, reflect.Interface, reflect.Slice, reflect.Map, reflect.Chan, reflect.Func:
-		return rv.IsNil()
-	}
-	return false
 }
