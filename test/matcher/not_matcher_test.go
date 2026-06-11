@@ -36,3 +36,7 @@ func Test_NotMatcher_Set(t *testing.T) {
 		t.Fatal("expected match to be false")
 	}
 }
+
+func Test_NotMatcher_implementsLazyMatcher(t *testing.T) {
+	var _ matcher.LazyMatcher[any, matcher.Matcher[any]] = matcher.NewNotMatcher[any](nil)
+}
