@@ -1,4 +1,4 @@
-package pkg
+package assertionsuit
 
 import (
 	"github.com/sku0x20/assertgo/pkg/assertion"
@@ -6,14 +6,14 @@ import (
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
-type AssertionSuite struct {
+type AssertionSuit struct {
 	sink *sink.TSink
 }
 
-func NewAssertionSuite(s *sink.TSink) *AssertionSuite {
-	return &AssertionSuite{sink: s}
+func New(s *sink.TSink) *AssertionSuit {
+	return &AssertionSuit{sink: s}
 }
 
-func (a *AssertionSuite) Assert(value any) *assertion.AnyAssertion {
+func (a *AssertionSuit) Assert(value any) *assertion.AnyAssertion {
 	return assertion.NewAnyAssertion(matcherasserter.New(a.sink, value))
 }

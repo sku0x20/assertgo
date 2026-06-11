@@ -3,14 +3,14 @@ package test
 import (
 	"testing"
 
-	"github.com/sku0x20/assertgo/pkg"
 	"github.com/sku0x20/assertgo/pkg/assertion"
+	"github.com/sku0x20/assertgo/pkg/assertionsuit"
 )
 
-func Test_AssertionSuite_Assert_returnsAnyAssertion(t *testing.T) {
+func Test_AssertionSuit_Assert_returnsAnyAssertion(t *testing.T) {
 	_, s := NewSink()
-	suite := pkg.NewAssertionSuite(s)
-	var result any = suite.Assert("hello")
+	suit := assertionsuit.New(s)
+	var result any = suit.Assert("hello")
 	if _, ok := result.(*assertion.AnyAssertion); !ok {
 		t.Fatal("expected *assertion.AnyAssertion")
 	}
