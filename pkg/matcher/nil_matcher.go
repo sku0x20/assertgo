@@ -21,5 +21,5 @@ func (n *NilMatcher) Match(value any) bool {
 }
 
 func (n *NilMatcher) FailureMsg(value any) string {
-	return "expected nil but got non-nil"
+	return "expected nil"
 }
