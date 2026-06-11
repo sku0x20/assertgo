@@ -15,6 +15,11 @@ func New(s *sink.TSink, value any) *MatcherAsserter {
 	return &MatcherAsserter{sink: s, value: value}
 }
 
+func (ma *MatcherAsserter) WithPreviousMatcher(m matcher.Matcher[any]) *MatcherAsserter {
+	ma.previousMatcher = m
+	return ma
+}
+
 func (ma *MatcherAsserter) Assert(m matcher.Matcher[any]) {
 	if !m.Match(ma.value) {
 		ma.sink.Fail(m.FailureMsg(ma.value))
