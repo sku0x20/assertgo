@@ -14,6 +14,6 @@ func New(s *sink.TSink) *AssertionSuit {
 	return &AssertionSuit{sink: s}
 }
 
-func (a *AssertionSuit) Assert(value any) *assertion.AnyAssertion {
-	return assertion.NewAnyAssertion(matcherasserter.New(a.sink, value))
+func (a *AssertionSuit) Assert(value any) *assertion.Assertion[any] {
+	return assertion.New(matcherasserter.New(a.sink, value))
 }

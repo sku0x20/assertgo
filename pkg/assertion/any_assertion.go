@@ -5,31 +5,30 @@ import (
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 )
 
-type AnyAssertion struct {
-	asserter *matcherasserter.MatcherAsserter[any]
+type Assertion[V any] struct {
+	asserter *matcherasserter.MatcherAsserter[V]
 }
 
-func NewAnyAssertion(ma *matcherasserter.MatcherAsserter[any]) *AnyAssertion {
-	return &AnyAssertion{asserter: ma}
+func New[V any](ma *matcherasserter.MatcherAsserter[V]) *Assertion[V] {
+	return &Assertion[V]{asserter: ma}
 }
 
-func (a *AnyAssertion) Not() *AnyAssertion {
-	a.asserter.Chain(matcher.NewNotMatcher[any](nil))
+func (a *Assertion[V]) Not() *Assertion[V] {
+	a.asserter.Chain(matcher.NewNotMatcher[V](nil))
 	return a
 }
 
-func (a *AnyAssertion) EqualTo(other any) *AnyAssertion {
+func (a *Assertion[V]) EqualTo(other V) *Assertion[V] {
 	a.asserter.Assert(matcher.NewDeepEqualMatcher(other))
 	return a
 }
 
-func (a *AnyAssertion) SameAs(other any) *AnyAssertion {
+func (a *Assertion[V]) SameAs(other V) *Assertion[V] {
 	a.asserter.Assert(matcher.NewReferenceMatcher(other))
 	return a
 }
 
-func (a *AnyAssertion) IsNil() *AnyAssertion {
-	a.asserter.Assert(matcher.NewNilMatcher[any]())
+func (a *Assertion[V]) IsNil() *Assertion[V] {
+	a.asserter.Assert(matcher.NewNilMatcher[V]())
 	return a
 }
-
