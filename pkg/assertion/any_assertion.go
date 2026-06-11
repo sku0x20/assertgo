@@ -13,22 +13,22 @@ func NewAnyAssertion(ma *matcherasserter.MatcherAsserter) *AnyAssertion {
 	return &AnyAssertion{asserter: ma}
 }
 
-func (a *AnyAssertion) IsEqualTo(other any) *AnyAssertion {
+func (a *AnyAssertion) EqualTo(other any) *AnyAssertion {
 	a.asserter.Assert(matcher.NewDeepEqualMatcher(other))
 	return a
 }
 
-func (a *AnyAssertion) IsSameAs(other any) *AnyAssertion {
+func (a *AnyAssertion) SameAs(other any) *AnyAssertion {
 	a.asserter.Assert(matcher.NewReferenceMatcher(other))
 	return a
 }
 
-func (a *AnyAssertion) IsNotEqualTo(other any) *AnyAssertion {
+func (a *AnyAssertion) NotEqualTo(other any) *AnyAssertion {
 	a.asserter.Assert(matcher.NewNotMatcher[any](matcher.NewDeepEqualMatcher(other)))
 	return a
 }
 
-func (a *AnyAssertion) IsNotSameAs(other any) *AnyAssertion {
+func (a *AnyAssertion) NotSameAs(other any) *AnyAssertion {
 	a.asserter.Assert(matcher.NewNotMatcher[any](matcher.NewReferenceMatcher(other)))
 	return a
 }

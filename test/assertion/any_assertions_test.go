@@ -13,17 +13,17 @@ func newAssertion(s *sink.TSink, value any) *assertion.AnyAssertion {
 	return assertion.NewAnyAssertion(matcherasserter.New(s, value))
 }
 
-func Test_AnyAssertion_IsEqualTo(t *testing.T) {
+func Test_AnyAssertion_EqualTo(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").IsEqualTo("hello")
+		newAssertion(sink, "hello").EqualTo("hello")
 		if mock.FatalCalled {
 			t.Fatal("expected no failure")
 		}
 	})
 	t.Run("fail", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").IsEqualTo("world")
+		newAssertion(sink, "hello").EqualTo("world")
 		if !mock.FatalCalled {
 			t.Fatal("expected failure")
 		}
@@ -64,27 +64,27 @@ func Test_AnyAssertion_IsNotNil(t *testing.T) {
 	})
 }
 
-func Test_AnyAssertion_IsNotEqualTo(t *testing.T) {
+func Test_AnyAssertion_NotEqualTo(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").IsNotEqualTo("world")
+		newAssertion(sink, "hello").NotEqualTo("world")
 		if mock.FatalCalled {
 			t.Fatal("expected no failure")
 		}
 	})
 	t.Run("fail", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").IsNotEqualTo("hello")
+		newAssertion(sink, "hello").NotEqualTo("hello")
 		if !mock.FatalCalled {
 			t.Fatal("expected failure")
 		}
 	})
 }
 
-func Test_AnyAssertion_IsNotSameAs(t *testing.T) {
+func Test_AnyAssertion_NotSameAs(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, new(int)).IsNotSameAs(new(int))
+		newAssertion(sink, new(int)).NotSameAs(new(int))
 		if mock.FatalCalled {
 			t.Fatal("expected no failure")
 		}
@@ -92,25 +92,25 @@ func Test_AnyAssertion_IsNotSameAs(t *testing.T) {
 	t.Run("fail", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
 		obj := new(int)
-		newAssertion(sink, obj).IsNotSameAs(obj)
+		newAssertion(sink, obj).NotSameAs(obj)
 		if !mock.FatalCalled {
 			t.Fatal("expected failure")
 		}
 	})
 }
 
-func Test_AnyAssertion_IsSameAs(t *testing.T) {
+func Test_AnyAssertion_SameAs(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
 		obj := new(int)
-		newAssertion(sink, obj).IsSameAs(obj)
+		newAssertion(sink, obj).SameAs(obj)
 		if mock.FatalCalled {
 			t.Fatal("expected no failure")
 		}
 	})
 	t.Run("fail", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
-		newAssertion(sink, new(int)).IsSameAs(new(int))
+		newAssertion(sink, new(int)).SameAs(new(int))
 		if !mock.FatalCalled {
 			t.Fatal("expected failure")
 		}
