@@ -1,4 +1,4 @@
-package assertions
+package assertion
 
 import (
 	"fmt"
@@ -7,19 +7,19 @@ import (
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
-type AnyAssertions struct {
+type AnyAssertion struct {
 	sink  *sink.TSink
 	value any
 }
 
-func NewAnyAssertions(s *sink.TSink, value any) *AnyAssertions {
-	return &AnyAssertions{
+func NewAnyAssertion(s *sink.TSink, value any) *AnyAssertion {
+	return &AnyAssertion{
 		sink:  s,
 		value: value,
 	}
 }
 
-func (a *AnyAssertions) IsEqualTo(other any) {
+func (a *AnyAssertion) IsEqualTo(other any) {
 	if !reflect.DeepEqual(a.value, other) {
 		a.sink.Fail(fmt.Sprintf("expected %v but got %v", other, a.value))
 	}
