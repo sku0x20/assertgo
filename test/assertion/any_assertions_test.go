@@ -81,7 +81,7 @@ func Test_AnyAssertion_NotEqualTo(t *testing.T) {
 	})
 }
 
-func Test_AnyAssertion_Not().SameAs(t *testing.T) {
+func Test_AnyAssertion_NotSameAs(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
 		mock, sink := agtest.NewSink()
 		newAssertion(sink, new(int)).Not().SameAs(new(int))
