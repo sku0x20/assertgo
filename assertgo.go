@@ -1,11 +1,14 @@
 package assertgo
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/sku0x20/assertgo/pkg"
+)
 
 func T(t testing.TB) {
-	t.FailNow()
+	sink := pkg.NewFailSink(t)
+	sink.Fail("failed")
 }
 
-// func Ts(t testing.TB) {
-// 	t.Fail()
-// }
+// func Ts(t testing.TB) {}

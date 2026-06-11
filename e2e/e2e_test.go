@@ -10,8 +10,7 @@ import (
 func Test_FailHard(t *testing.T) {
 	mock := &agtest.MockT{}
 	T(mock)
-	if !mock.FailNowCalled {
+	if !mock.FatalCalled {
 		t.Fatal("should have called FailNow")
 	}
 }
-
