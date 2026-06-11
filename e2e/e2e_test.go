@@ -1,16 +1,10 @@
 package e2e
 
-import "testing"
-import . "github.com/sku0x20/assertgo"
+import (
+	"testing"
 
-type mockT struct {
-	testing.TB
-	failCalled    bool
-	failNowCalled bool
-}
-
-func (m *mockT) Fail()    { m.failCalled = true }
-func (m *mockT) FailNow() { m.failNowCalled = true }
+	. "github.com/sku0x20/assertgo"
+)
 
 func Test_FailHard(t *testing.T) {
 	mock := &mockT{}
