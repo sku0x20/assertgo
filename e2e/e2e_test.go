@@ -7,10 +7,11 @@ import (
 	agtest "github.com/sku0x20/assertgo/test"
 )
 
-func Test_FailHard(t *testing.T) {
-	mock := &agtest.MockT{}
-	T(mock)
-	if !mock.FatalCalled {
+func Test_Fail(tt *testing.T) {
+	t := &agtest.MockT{}
+	//T(t).Assert("10").isEqualTo("9")
+	T(t)
+	if !t.FatalCalled {
 		t.Fatal("should have called FailNow")
 	}
 }
