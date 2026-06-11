@@ -13,106 +13,52 @@ func newAssertion(s *sink.TSink, value any) *assertion.AnyAssertion {
 	return assertion.NewAnyAssertion(matcherasserter.New(s, value))
 }
 
+func assertPasses(t *testing.T, value any, fn func(*assertion.AnyAssertion)) {
+	t.Helper()
+	mock, s := agtest.NewSink()
+	fn(newAssertion(s, value))
+	if mock.FatalCalled {
+		t.Fatal("expected no failure")
+	}
+}
+
+func assertFails(t *testing.T, value any, fn func(*assertion.AnyAssertion)) {
+	t.Helper()
+	mock, s := agtest.NewSink()
+	fn(newAssertion(s, value))
+	if !mock.FatalCalled {
+		t.Fatal("expected failure")
+	}
+}
+
 func Test_AnyAssertion_EqualTo(t *testing.T) {
-	t.Run("pass", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").EqualTo("hello")
-		if mock.FatalCalled {
-			t.Fatal("expected no failure")
-		}
-	})
-	t.Run("fail", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").EqualTo("world")
-		if !mock.FatalCalled {
-			t.Fatal("expected failure")
-		}
-	})
+	t.Run("pass", func(t *testing.T) { assertPasses(t, "hello", func(a *assertion.AnyAssertion) { a.EqualTo("hello") }) })
+	t.Run("fail", func(t *testing.T) { assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.EqualTo("world") }) })
 }
 
 func Test_AnyAssertion_IsNil(t *testing.T) {
-	t.Run("pass", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, nil).IsNil()
-		if mock.FatalCalled {
-			t.Fatal("expected no failure")
-		}
-	})
-	t.Run("fail", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").IsNil()
-		if !mock.FatalCalled {
-			t.Fatal("expected failure")
-		}
-	})
+	t.Run("pass", func(t *testing.T) { assertPasses(t, nil, func(a *assertion.AnyAssertion) { a.IsNil() }) })
+	t.Run("fail", func(t *testing.T) { assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.IsNil() }) })
 }
 
 func Test_AnyAssertion_IsNotNil(t *testing.T) {
-	t.Run("pass", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").Not().IsNil()
-		if mock.FatalCalled {
-			t.Fatal("expected no failure")
-		}
-	})
-	t.Run("fail", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, nil).Not().IsNil()
-		if !mock.FatalCalled {
-			t.Fatal("expected failure")
-		}
-	})
+	t.Run("pass", func(t *testing.T) { assertPasses(t, "hello", func(a *assertion.AnyAssertion) { a.Not().IsNil() }) })
+	t.Run("fail", func(t *testing.T) { assertFails(t, nil, func(a *assertion.AnyAssertion) { a.Not().IsNil() }) })
 }
 
 func Test_AnyAssertion_NotEqualTo(t *testing.T) {
-	t.Run("pass", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").Not().EqualTo("world")
-		if mock.FatalCalled {
-			t.Fatal("expected no failure")
-		}
-	})
-	t.Run("fail", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, "hello").Not().EqualTo("hello")
-		if !mock.FatalCalled {
-			t.Fatal("expected failure")
-		}
-	})
-}
-
-func Test_AnyAssertion_NotSameAs(t *testing.T) {
-	t.Run("pass", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, new(int)).Not().SameAs(new(int))
-		if mock.FatalCalled {
-			t.Fatal("expected no failure")
-		}
-	})
-	t.Run("fail", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		obj := new(int)
-		newAssertion(sink, obj).Not().SameAs(obj)
-		if !mock.FatalCalled {
-			t.Fatal("expected failure")
-		}
-	})
+	t.Run("pass", func(t *testing.T) { assertPasses(t, "hello", func(a *assertion.AnyAssertion) { a.Not().EqualTo("world") }) })
+	t.Run("fail", func(t *testing.T) { assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.Not().EqualTo("hello") }) })
 }
 
 func Test_AnyAssertion_SameAs(t *testing.T) {
-	t.Run("pass", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		obj := new(int)
-		newAssertion(sink, obj).SameAs(obj)
-		if mock.FatalCalled {
-			t.Fatal("expected no failure")
-		}
-	})
-	t.Run("fail", func(t *testing.T) {
-		mock, sink := agtest.NewSink()
-		newAssertion(sink, new(int)).SameAs(new(int))
-		if !mock.FatalCalled {
-			t.Fatal("expected failure")
-		}
-	})
+	obj := new(int)
+	t.Run("pass", func(t *testing.T) { assertPasses(t, obj, func(a *assertion.AnyAssertion) { a.SameAs(obj) }) })
+	t.Run("fail", func(t *testing.T) { assertFails(t, new(int), func(a *assertion.AnyAssertion) { a.SameAs(new(int)) }) })
+}
+
+func Test_AnyAssertion_NotSameAs(t *testing.T) {
+	obj := new(int)
+	t.Run("pass", func(t *testing.T) { assertPasses(t, new(int), func(a *assertion.AnyAssertion) { a.Not().SameAs(new(int)) }) })
+	t.Run("fail", func(t *testing.T) { assertFails(t, obj, func(a *assertion.AnyAssertion) { a.Not().SameAs(obj) }) })
 }
