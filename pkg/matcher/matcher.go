@@ -1,6 +1,6 @@
 package matcher
 
 type Matcher interface {
-	Match() bool
-	FailureMsg() string
+	Match(value any) bool
+	FailureMsg(value any) string
 }
