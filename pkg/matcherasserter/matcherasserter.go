@@ -8,14 +8,14 @@ import (
 type MatcherAsserter[T any] struct {
 	sink  *sink.TSink
 	value T
-	chain matcher.LazyMatcher[matcher.Matcher[T]]
+	chain matcher.LazyMatcher[T]
 }
 
 func New[T any](s *sink.TSink, value T) *MatcherAsserter[T] {
 	return &MatcherAsserter[T]{sink: s, value: value}
 }
 
-func (ma *MatcherAsserter[T]) Chain(m matcher.LazyMatcher[matcher.Matcher[T]]) {
+func (ma *MatcherAsserter[T]) Chain(m matcher.LazyMatcher[T]) {
 	ma.chain = m
 }
 

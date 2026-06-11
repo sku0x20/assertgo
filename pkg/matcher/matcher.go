@@ -7,5 +7,5 @@ type Matcher[T any] interface {
 
 type LazyMatcher[T any] interface {
 	Matcher[T]
-	Set(v T)
+	Set(v Matcher[T])
 }
