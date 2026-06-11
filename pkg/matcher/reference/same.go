@@ -1,12 +1,6 @@
 package reference
 
-import (
-	"fmt"
-
-	"github.com/sku0x20/assertgo/pkg/matcher"
-)
-
-var _ matcher.Matcher[any] = (*SameReferenceMatcher)(nil)
+import "fmt"
 
 type SameReferenceMatcher struct {
 	other any
