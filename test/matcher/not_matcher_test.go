@@ -23,7 +23,7 @@ func Test_NotMatcher_Match(t *testing.T) {
 
 func Test_NotMatcher_FailureMsg(t *testing.T) {
 	m := matcher.NewNotMatcher[any](&mockMatcher{failureMsg: "some failure"})
-	if m.FailureMsg(nil) != "some failure" {
-		t.Fatal("expected failure message to be delegated to inner matcher")
+	if m.FailureMsg(nil) != "not: some failure" {
+		t.Fatal("expected failure message to be prefixed with 'not: '")
 	}
 }

@@ -13,5 +13,5 @@ func (n *NotMatcher[T]) Match(value T) bool {
 }
 
 func (n *NotMatcher[T]) FailureMsg(value T) string {
-	return n.matcher.FailureMsg(value)
+	return "not: " + n.matcher.FailureMsg(value)
 }
