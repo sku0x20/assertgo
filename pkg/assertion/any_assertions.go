@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
@@ -27,6 +28,10 @@ func (a *AnyAssertion) IsEqualTo(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsSameAs(other any) *AnyAssertion {
+	m := matcher.NewReferenceMatcher(other)
+	if !m.Match(a.value) {
+		a.sink.Fail(m.FailureMsg(a.value))
+	}
 	return a
 }
 
@@ -38,6 +43,10 @@ func (a *AnyAssertion) IsNotEqualTo(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsNotSameAs(other any) *AnyAssertion {
+	m := matcher.NewNotMatcher[any](matcher.NewReferenceMatcher(other))
+	if !m.Match(a.value) {
+		a.sink.Fail(m.FailureMsg(a.value))
+	}
 	return a
 }
 
