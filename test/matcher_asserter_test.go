@@ -9,7 +9,7 @@ import (
 
 func Test_MatcherAsserter_pass(t *testing.T) {
 	mock, sink := NewSink()
-	pkg.MatcherAsserter(sink, &testmatcher.MockMatcher{MatchResult: true}, nil)
+	pkg.NewMatcherAsserter(sink, nil).Assert(&testmatcher.MockMatcher{MatchResult: true})
 	if mock.FatalCalled {
 		t.Fatal("expected no failure")
 	}
@@ -17,7 +17,7 @@ func Test_MatcherAsserter_pass(t *testing.T) {
 
 func Test_MatcherAsserter_fail(t *testing.T) {
 	mock, sink := NewSink()
-	pkg.MatcherAsserter(sink, &testmatcher.MockMatcher{MatchResult: false, Msg: "failed"}, nil)
+	pkg.NewMatcherAsserter(sink, nil).Assert(&testmatcher.MockMatcher{MatchResult: false, Msg: "failed"})
 	if !mock.FatalCalled {
 		t.Fatal("expected failure")
 	}
