@@ -19,14 +19,16 @@ func NewAnyAssertion(s *sink.TSink, value any) *AnyAssertion {
 	}
 }
 
-func (a *AnyAssertion) IsEqualTo(other any) {
+func (a *AnyAssertion) IsEqualTo(other any) *AnyAssertion {
 	if !reflect.DeepEqual(a.value, other) {
 		a.sink.Fail(fmt.Sprintf("expected %v but got %v", other, a.value))
 	}
+	return a
 }
 
-func (a *AnyAssertion) IsSameAs(other any) {
+func (a *AnyAssertion) IsSameAs(other any) *AnyAssertion {
 	if a.value != other {
 		a.sink.Fail(fmt.Sprintf("expected same reference as %v but got %v", other, a.value))
 	}
+	return a
 }
