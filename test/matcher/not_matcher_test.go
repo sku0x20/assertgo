@@ -4,17 +4,18 @@ import (
 	"testing"
 
 	"github.com/sku0x20/assertgo/pkg/matcher"
+	agtest "github.com/sku0x20/assertgo/test"
 )
 
 func Test_NotMatcher_Match(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
-		m := matcher.NewNotMatcher[any](&mockMatcher{matchResult: false})
+		m := matcher.NewNotMatcher[any](&agtest.MockMatcher{MatchResult: false})
 		if !m.Match(nil) {
 			t.Fatal("expected match to be true")
 		}
 	})
 	t.Run("fail", func(t *testing.T) {
-		m := matcher.NewNotMatcher[any](&mockMatcher{matchResult: true})
+		m := matcher.NewNotMatcher[any](&agtest.MockMatcher{MatchResult: true})
 		if m.Match(nil) {
 			t.Fatal("expected match to be false")
 		}
@@ -22,9 +23,8 @@ func Test_NotMatcher_Match(t *testing.T) {
 }
 
 func Test_NotMatcher_FailureMsg(t *testing.T) {
-	m := matcher.NewNotMatcher[any](&mockMatcher{failureMsg: "some failure"})
+	m := matcher.NewNotMatcher[any](&agtest.MockMatcher{Msg: "some failure"})
 	msg := m.FailureMsg(nil)
-	//t.Log(msg)
 	if msg != "not: some failure" {
 		t.Fatal("expected failure message to be prefixed with 'not: '")
 	}
