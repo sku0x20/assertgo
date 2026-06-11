@@ -20,6 +20,10 @@ func (ma *MatcherAsserter[T]) Chain(m matcher.LazyMatcher[matcher.Matcher[T]]) {
 }
 
 func (ma *MatcherAsserter[T]) Assert(m matcher.Matcher[T]) {
+	if ma.chain != nil {
+		ma.chain.Set(m)
+		m = ma.chain
+	}
 	if !m.Match(ma.value) {
 		ma.sink.Fail(m.FailureMsg(ma.value))
 	}
