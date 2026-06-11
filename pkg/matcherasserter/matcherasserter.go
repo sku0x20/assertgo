@@ -8,15 +8,15 @@ import (
 type MatcherAsserter struct {
 	sink            *sink.TSink
 	value           any
-	previousMatcher matcher.Matcher[any]
+	chain matcher.Matcher[any]
 }
 
 func New(s *sink.TSink, value any) *MatcherAsserter {
 	return &MatcherAsserter{sink: s, value: value}
 }
 
-func (ma *MatcherAsserter) chainMatcher(m matcher.Matcher[any]) {
-	ma.previousMatcher = m
+func (ma *MatcherAsserter) Chain(m matcher.Matcher[any]) {
+	ma.chain = m
 }
 
 func (ma *MatcherAsserter) Assert(m matcher.Matcher[any]) {
