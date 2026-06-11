@@ -7,7 +7,7 @@ import (
 	agtest "github.com/sku0x20/assertgo/test"
 )
 
-func Test_IsEqualTo_fails_when_values_differ(tt *testing.T) {
+func Test_Assert(tt *testing.T) {
 	t := &agtest.MockT{}
 	T(t).Assert("10").IsEqualTo("9")
 	if !t.FatalCalled {
