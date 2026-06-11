@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"github.com/sku0x20/assertgo/pkg/assertion"
+	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
@@ -14,5 +15,5 @@ func NewAssertionSuite(s *sink.TSink) *AssertionSuite {
 }
 
 func (a *AssertionSuite) Assert(value any) *assertion.AnyAssertion {
-	return assertion.NewAnyAssertion(a.sink, value)
+	return assertion.NewAnyAssertion(matcherasserter.New(a.sink, value))
 }

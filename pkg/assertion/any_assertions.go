@@ -3,21 +3,14 @@ package assertion
 import (
 	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
-	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
 type AnyAssertion struct {
-	sink     *sink.TSink
-	value    any
 	asserter *matcherasserter.MatcherAsserter
 }
 
-func NewAnyAssertion(s *sink.TSink, value any) *AnyAssertion {
-	return &AnyAssertion{
-		sink:     s,
-		value:    value,
-		asserter: matcherasserter.New(s, value),
-	}
+func NewAnyAssertion(ma *matcherasserter.MatcherAsserter) *AnyAssertion {
+	return &AnyAssertion{asserter: ma}
 }
 
 func (a *AnyAssertion) IsEqualTo(other any) *AnyAssertion {
