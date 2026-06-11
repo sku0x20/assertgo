@@ -15,7 +15,7 @@ func New(s *sink.TSink, value any) *MatcherAsserter {
 	return &MatcherAsserter{sink: s, value: value}
 }
 
-func (ma *MatcherAsserter) WithPreviousMatcher(m matcher.Matcher[any]) *MatcherAsserter {
+func (ma *MatcherAsserter) Chain(m matcher.Matcher[any]) *MatcherAsserter {
 	ma.previousMatcher = m
 	return ma
 }
