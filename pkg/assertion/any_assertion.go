@@ -28,25 +28,8 @@ func (a *AnyAssertion) SameAs(other any) *AnyAssertion {
 	return a
 }
 
-func (a *AnyAssertion) NotEqualTo(other any) *AnyAssertion {
-	a.asserter.Chain(matcher.NewNotMatcher[any](nil))
-	a.asserter.Assert(matcher.NewDeepEqualMatcher(other))
-	return a
-}
-
-func (a *AnyAssertion) NotSameAs(other any) *AnyAssertion {
-	a.asserter.Chain(matcher.NewNotMatcher[any](nil))
-	a.asserter.Assert(matcher.NewReferenceMatcher(other))
-	return a
-}
-
 func (a *AnyAssertion) IsNil() *AnyAssertion {
 	a.asserter.Assert(matcher.NewNilMatcher())
 	return a
 }
 
-func (a *AnyAssertion) IsNotNil() *AnyAssertion {
-	a.asserter.Chain(matcher.NewNotMatcher[any](nil))
-	a.asserter.Assert(matcher.NewNilMatcher())
-	return a
-}
