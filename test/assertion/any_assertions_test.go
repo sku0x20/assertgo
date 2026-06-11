@@ -23,7 +23,7 @@ func Test_AnyAssertion_IsNil(t *testing.T) {
 }
 
 func Test_AnyAssertion_Not(t *testing.T) {
-	assertFails(t, "hello", func(a *assertion.AnyAssertion) { a.Not().EqualTo("hello") })
+	assert(t, "hello", true, func(a *assertion.AnyAssertion) { a.Not().EqualTo("hello") })
 }
 
 func newAssertion(s *sink.TSink, value any) *assertion.AnyAssertion {
@@ -31,19 +31,14 @@ func newAssertion(s *sink.TSink, value any) *assertion.AnyAssertion {
 }
 
 func assertPasses(t *testing.T, value any, fn func(*assertion.AnyAssertion)) {
-	t.Helper()
-	mock, s := agtest.NewSink()
-	fn(newAssertion(s, value))
-	if mock.FatalCalled {
-		t.Fatal("expected no failure")
-	}
+	assert(t, value, false, fn)
 }
 
-func assertFails(t *testing.T, value any, fn func(*assertion.AnyAssertion)) {
+func assert(t *testing.T, value any, fail bool, fn func(*assertion.AnyAssertion)) {
 	t.Helper()
 	mock, s := agtest.NewSink()
 	fn(newAssertion(s, value))
-	if !mock.FatalCalled {
+	if mock.FatalCalled != fail {
 		t.Fatal("expected failure")
 	}
 }
