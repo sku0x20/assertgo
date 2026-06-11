@@ -30,7 +30,7 @@ func Test_NotMatcher_FailureMsg(t *testing.T) {
 }
 
 func Test_NotMatcher_Set(t *testing.T) {
-	m := matcher.NewNotMatcher[any](&MockMatcher{MatchResult: true})
+	m := matcher.NewNotMatcher[any](nil)
 	m.Set(&MockMatcher{MatchResult: false})
 	if !m.Match(nil) {
 		t.Fatal("expected match to be true after Set")
