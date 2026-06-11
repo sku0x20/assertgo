@@ -6,10 +6,10 @@ import (
 )
 
 type AnyAssertion struct {
-	asserter *matcherasserter.MatcherAsserter
+	asserter *matcherasserter.MatcherAsserter[any]
 }
 
-func NewAnyAssertion(ma *matcherasserter.MatcherAsserter) *AnyAssertion {
+func NewAnyAssertion(ma *matcherasserter.MatcherAsserter[any]) *AnyAssertion {
 	return &AnyAssertion{asserter: ma}
 }
 

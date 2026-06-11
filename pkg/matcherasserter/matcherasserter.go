@@ -5,21 +5,21 @@ import (
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
 
-type MatcherAsserter struct {
-	sink            *sink.TSink
-	value           any
-	chain matcher.LazyMatcher[matcher.Matcher[any]]
+type MatcherAsserter[T any] struct {
+	sink  *sink.TSink
+	value T
+	chain matcher.LazyMatcher[matcher.Matcher[T]]
 }
 
-func New(s *sink.TSink, value any) *MatcherAsserter {
-	return &MatcherAsserter{sink: s, value: value}
+func New[T any](s *sink.TSink, value T) *MatcherAsserter[T] {
+	return &MatcherAsserter[T]{sink: s, value: value}
 }
 
-func (ma *MatcherAsserter) Chain(m matcher.LazyMatcher[matcher.Matcher[any]]) {
+func (ma *MatcherAsserter[T]) Chain(m matcher.LazyMatcher[matcher.Matcher[T]]) {
 	ma.chain = m
 }
 
-func (ma *MatcherAsserter) Assert(m matcher.Matcher[any]) {
+func (ma *MatcherAsserter[T]) Assert(m matcher.Matcher[T]) {
 	if !m.Match(ma.value) {
 		ma.sink.Fail(m.FailureMsg(ma.value))
 	}
