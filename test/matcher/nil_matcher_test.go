@@ -8,13 +8,13 @@ import (
 
 func Test_NilMatcher_Match(t *testing.T) {
 	t.Run("pass", func(t *testing.T) {
-		m := matcher.NewNilMatcher()
+		m := matcher.NewNilMatcher[any]()
 		if !m.Match(nil) {
 			t.Fatal("expected match to be true")
 		}
 	})
 	t.Run("fail", func(t *testing.T) {
-		m := matcher.NewNilMatcher()
+		m := matcher.NewNilMatcher[any]()
 		if m.Match("hello") {
 			t.Fatal("expected match to be false")
 		}
@@ -22,7 +22,7 @@ func Test_NilMatcher_Match(t *testing.T) {
 }
 
 func Test_NilMatcher_FailureMsg(t *testing.T) {
-	m := matcher.NewNilMatcher()
+	m := matcher.NewNilMatcher[any]()
 	if m.FailureMsg("hello") == "" {
 		t.Fatal("expected non-empty failure message")
 	}

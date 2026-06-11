@@ -29,7 +29,7 @@ func (a *AnyAssertion) SameAs(other any) *AnyAssertion {
 }
 
 func (a *AnyAssertion) IsNil() *AnyAssertion {
-	a.asserter.Assert(matcher.NewNilMatcher())
+	a.asserter.Assert(matcher.NewNilMatcher[any]())
 	return a
 }
 

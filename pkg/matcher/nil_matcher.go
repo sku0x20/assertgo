@@ -2,17 +2,17 @@ package matcher
 
 import "reflect"
 
-type NilMatcher struct{}
+type NilMatcher[V any] struct{}
 
-func NewNilMatcher() *NilMatcher {
-	return &NilMatcher{}
+func NewNilMatcher[V any]() *NilMatcher[V] {
+	return &NilMatcher[V]{}
 }
 
-func (n *NilMatcher) Match(value any) bool {
-	if value == nil {
+func (n *NilMatcher[V]) Match(value V) bool {
+	if any(value) == nil {
 		return true
 	}
-	rv := reflect.ValueOf(value)
+	rv := reflect.ValueOf(any(value))
 	switch rv.Kind() {
 	case reflect.Ptr, reflect.Interface, reflect.Slice, reflect.Map, reflect.Chan, reflect.Func:
 		return rv.IsNil()
@@ -20,6 +20,6 @@ func (n *NilMatcher) Match(value any) bool {
 	return false
 }
 
-func (n *NilMatcher) FailureMsg(value any) string {
+func (n *NilMatcher[V]) FailureMsg(value V) string {
 	return "expected nil"
 }

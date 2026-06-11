@@ -5,18 +5,18 @@ import (
 	"reflect"
 )
 
-type DeepEqualMatcher struct {
-	other any
+type DeepEqualMatcher[V any] struct {
+	other V
 }
 
-func NewDeepEqualMatcher(other any) *DeepEqualMatcher {
-	return &DeepEqualMatcher{other: other}
+func NewDeepEqualMatcher[V any](other V) *DeepEqualMatcher[V] {
+	return &DeepEqualMatcher[V]{other: other}
 }
 
-func (d *DeepEqualMatcher) Match(value any) bool {
+func (d *DeepEqualMatcher[V]) Match(value V) bool {
 	return reflect.DeepEqual(value, d.other)
 }
 
-func (d *DeepEqualMatcher) FailureMsg(value any) string {
+func (d *DeepEqualMatcher[V]) FailureMsg(value V) string {
 	return fmt.Sprintf("expected %v but got %v", d.other, value)
 }
