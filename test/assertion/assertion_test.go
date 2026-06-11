@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/sku0x20/assertgo/pkg/assertion"
+	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 	agtest "github.com/sku0x20/assertgo/test"
 )
@@ -19,6 +20,10 @@ func Test_Assertion_SameAs(t *testing.T) {
 
 func Test_Assertion_IsNil(t *testing.T) {
 	assertPasses(t, nil, func(a *assertion.Assertion[any]) { a.IsNil() })
+}
+
+func Test_Assertion_Matches(t *testing.T) {
+	assertPasses(t, "hello", func(a *assertion.Assertion[any]) { a.Matches(matcher.NewDeepEqualMatcher[any]("hello")) })
 }
 
 func Test_Assertion_Not(t *testing.T) {
