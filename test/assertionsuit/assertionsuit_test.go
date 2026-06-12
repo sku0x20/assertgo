@@ -17,6 +17,15 @@ func Test_AssertionSuit_Assert_returnsAssertion(t *testing.T) {
 	}
 }
 
+func Test_AssertionSuit_AssertBool_returnsBoolAssertion(t *testing.T) {
+	_, s := agtest.NewSink()
+	suit := assertionsuit.New(s)
+	var result any = suit.AssertBool(true)
+	if _, ok := result.(*assertion.BoolAssertion); !ok {
+		t.Fatal("expected *assertion.BoolAssertion")
+	}
+}
+
 func Test_AssertionSuit_AssertSlice_returnsSliceAssertion(t *testing.T) {
 	_, s := agtest.NewSink()
 	suit := assertionsuit.New(s)
