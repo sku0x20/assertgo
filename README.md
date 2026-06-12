@@ -46,12 +46,13 @@ func TestSomething(t *testing.T) {
 ## Custom Comparator
 
 ```go
-import (
-    . "github.com/sku0x20/assertgo"
-    "github.com/sku0x20/assertgo/pkg/comparator"
-)
+T(t).Assert(myStruct).WithComparator(myComparator).EqualTo(expected)
+```
 
-func TestCustomComparator(t *testing.T) {
-    T(t).Assert(myStruct).WithComparator(myComparator).EqualTo(expected)
-}
+## Custom Matcher
+
+```go
+import "github.com/sku0x20/assertgo/pkg/matcher"
+
+T(t).Assert("hello").Matches(matcher.NewNotMatcher[any](matcher.NewNilMatcher[any]()))
 ```
