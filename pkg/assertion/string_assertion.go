@@ -25,11 +25,6 @@ func (a *StringAssertion) Not() *StringAssertion {
 	return a
 }
 
-func (a *StringAssertion) WithComparator(c comparator.Comparator[string]) *StringAssertion {
-	a.comparator = c
-	return a
-}
-
 func (a *StringAssertion) EqualTo(other string) *StringAssertion {
 	a.asserter.Assert(matcher.NewEqualMatcher(other, a.comparator))
 	return a
