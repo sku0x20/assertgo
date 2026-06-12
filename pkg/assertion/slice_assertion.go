@@ -30,7 +30,7 @@ func (a *SliceAssertion[E]) HasLength(length int) *SliceAssertion[E] {
 }
 
 func (a *SliceAssertion[E]) IsEmpty() *SliceAssertion[E] {
-	a.asserter.Assert(slicematcher.NewEmptyMatcher[E]())
+	a.asserter.Assert(slicematcher.NewLengthMatcher[E](0))
 	return a
 }
 
