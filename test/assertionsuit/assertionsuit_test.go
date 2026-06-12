@@ -28,6 +28,10 @@ func Test_AssertionSuit_AssertMap_returnsMapAssertion(t *testing.T) {
 	assertType[*assertion.MapAssertion[any, any]](t, newSuit().AssertMap(map[any]any{"a": 1}))
 }
 
+func Test_AssertionSuit_AssertString_returnsStringAssertion(t *testing.T) {
+	assertType[*assertion.StringAssertion](t, newSuit().AssertString("hello"))
+}
+
 func Test_AssertionSuit_AssertType_returnsTypeAssertion(t *testing.T) {
 	assertType[*assertion.TypeAssertion](t, newSuit().AssertType(42))
 }

@@ -43,6 +43,10 @@ func (a *AssertionSuit) AssertMap(value map[any]any) *assertion.MapAssertion[any
 	return assertion.NewMap[any, any](matcherasserter.New(a.sink, value))
 }
 
+func (a *AssertionSuit) AssertString(value string) *assertion.StringAssertion {
+	return assertion.NewString(matcherasserter.New(a.sink, value))
+}
+
 func (a *AssertionSuit) AssertType(value any) *assertion.TypeAssertion {
 	return assertion.NewType(matcherasserter.New(a.sink, value))
 }
