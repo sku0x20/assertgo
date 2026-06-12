@@ -16,3 +16,12 @@ func Test_AssertionSuit_Assert_returnsAssertion(t *testing.T) {
 		t.Fatal("expected *assertion.Assertion[any]")
 	}
 }
+
+func Test_AssertionSuit_AssertSlice_returnsSliceAssertion(t *testing.T) {
+	_, s := agtest.NewSink()
+	suit := assertionsuit.New(s)
+	var result any = suit.AssertSlice([]any{1, 2, 3})
+	if _, ok := result.(*assertion.SliceAssertion[any]); !ok {
+		t.Fatal("expected *assertion.SliceAssertion[any]")
+	}
+}
