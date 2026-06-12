@@ -15,7 +15,7 @@ func NewType(ma *matcherasserter.MatcherAsserter[any]) *TypeAssertion {
 	return &TypeAssertion{asserter: ma}
 }
 
-func (a *TypeAssertion) Is(expected reflect.Type) *TypeAssertion {
+func (a *TypeAssertion) IsType(expected reflect.Type) *TypeAssertion {
 	a.asserter.Assert(matcher.NewReflectTypeMatcher(expected))
 	return a
 }
