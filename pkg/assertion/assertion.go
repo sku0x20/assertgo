@@ -18,6 +18,11 @@ func New[V any](ma *matcherasserter.MatcherAsserter[V]) *Assertion[V] {
 	}
 }
 
+func (a *Assertion[V]) WithComparator(c comparator.Comparator[V]) *Assertion[V] {
+	a.comparator = c
+	return a
+}
+
 func (a *Assertion[V]) Not() *Assertion[V] {
 	a.asserter.Chain(matcher.NewNotMatcher[V](nil))
 	return a
