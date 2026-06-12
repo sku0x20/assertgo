@@ -15,6 +15,7 @@ go get github.com/sku0x20/assertgo
 ```go
 import (
     . "github.com/sku0x20/assertgo"
+    "github.com/sku0x20/assertgo/pkg/comparator"
     "github.com/sku0x20/assertgo/pkg/matcher"
 )
 
@@ -23,6 +24,6 @@ func TestSomething(t *testing.T) {
     T(t).Assert("hello").Not().EqualTo("world")
 
     // For advanced cases, pass a Matcher[V] directly
-    T(t).Assert("world").Matches(matcher.NewNotMatcher[any](matcher.NewDeepEqualMatcher[any]("hello")))
+    T(t).Assert("world").Matches(matcher.NewNotMatcher[any](matcher.NewEqualMatcher[any]("hello", comparator.NewDeepReflectComparator[any]())))
 }
 ```
