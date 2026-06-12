@@ -4,6 +4,7 @@ import (
 	"github.com/sku0x20/assertgo/pkg/comparator"
 	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
+	"github.com/sku0x20/assertgo/pkg/matcher/collection"
 	slicematcher "github.com/sku0x20/assertgo/pkg/matcher/slice"
 )
 
@@ -30,12 +31,12 @@ func (a *SliceAssertion[E]) WithComparator(c comparator.Comparator[E]) *SliceAss
 }
 
 func (a *SliceAssertion[E]) HasLength(length int) *SliceAssertion[E] {
-	a.asserter.Assert(slicematcher.NewLengthMatcher[E](length))
+	a.asserter.Assert(collection.NewLengthMatcher[[]E](length))
 	return a
 }
 
 func (a *SliceAssertion[E]) IsEmpty() *SliceAssertion[E] {
-	a.asserter.Assert(slicematcher.NewLengthMatcher[E](0))
+	a.asserter.Assert(collection.NewLengthMatcher[[]E](0))
 	return a
 }
 

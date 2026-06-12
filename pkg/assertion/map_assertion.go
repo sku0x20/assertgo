@@ -4,6 +4,7 @@ import (
 	"github.com/sku0x20/assertgo/pkg/comparator"
 	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
+	"github.com/sku0x20/assertgo/pkg/matcher/collection"
 	map_matcher "github.com/sku0x20/assertgo/pkg/matcher/map"
 )
 
@@ -40,7 +41,7 @@ func (a *MapAssertion[K, V]) ContainsAllEntries(entries map[K]V) *MapAssertion[K
 }
 
 func (a *MapAssertion[K, V]) HasLength(length int) *MapAssertion[K, V] {
-	a.asserter.Assert(map_matcher.NewLengthMatcher[K, V](length))
+	a.asserter.Assert(collection.NewLengthMatcher[map[K]V](length))
 	return a
 }
 
