@@ -12,7 +12,8 @@ import (
 
 func Test_Assertion_WithComparator_EqualTo(t *testing.T) {
 	assertPasses(t, "hello", func(a *assertion.Assertion[any]) {
-		a.WithComparator(&testcomparator.MockComparator[any]{Result: 0}).EqualTo("hello")
+		a.WithComparator(&testcomparator.MockComparator[any]{Result: 0}).
+			EqualTo("hello")
 	})
 }
 
