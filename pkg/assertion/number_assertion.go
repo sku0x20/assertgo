@@ -25,11 +25,6 @@ func (a *NumberAssertion[V]) Not() *NumberAssertion[V] {
 	return a
 }
 
-func (a *NumberAssertion[V]) WithComparator(c comparator.Comparator[V]) *NumberAssertion[V] {
-	a.comparator = c
-	return a
-}
-
 func (a *NumberAssertion[V]) EqualTo(other V) *NumberAssertion[V] {
 	a.asserter.Assert(matcher.NewEqualMatcher(other, a.comparator))
 	return a
