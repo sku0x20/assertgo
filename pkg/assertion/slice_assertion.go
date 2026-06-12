@@ -2,6 +2,7 @@ package assertion
 
 import (
 	"github.com/sku0x20/assertgo/pkg/comparator"
+	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 	slicematcher "github.com/sku0x20/assertgo/pkg/matcher/slice"
 )
@@ -44,6 +45,6 @@ func (a *SliceAssertion[E]) ContainsAll(elements []E) *SliceAssertion[E] {
 }
 
 func (a *SliceAssertion[E]) ContainsNone(elements []E) *SliceAssertion[E] {
-	a.asserter.Assert(slicematcher.NewContainsNoneMatcher(elements, a.comparator))
+	a.asserter.Assert(matcher.NewNotMatcher[[]E](slicematcher.NewContainsAllMatcher(elements, a.comparator)))
 	return a
 }
