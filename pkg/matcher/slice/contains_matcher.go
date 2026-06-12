@@ -11,10 +11,10 @@ type ContainsMatcher[E any] struct {
 	comparator comparator.Comparator[E]
 }
 
-func NewContainsMatcher[E any](element E) *ContainsMatcher[E] {
+func NewContainsMatcher[E any](element E, c comparator.Comparator[E]) *ContainsMatcher[E] {
 	return &ContainsMatcher[E]{
 		element:    element,
-		comparator: comparator.NewDeepReflectComparator[E](),
+		comparator: c,
 	}
 }
 
