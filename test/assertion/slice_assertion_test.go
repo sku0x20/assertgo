@@ -38,6 +38,12 @@ func Test_SliceAssertion_ContainsNone(t *testing.T) {
 	})
 }
 
+func Test_SliceAssertion_Not_EqualTo(t *testing.T) {
+	assertSlicePasses(t, []any{1, 2, 3}, func(a *assertion.SliceAssertion[any]) {
+		a.Not().EqualTo([]any{1, 2, 4})
+	})
+}
+
 func assertSlicePasses(t *testing.T, value []any, fn func(*assertion.SliceAssertion[any])) {
 	t.Helper()
 	mock, s := agtest.NewSink()
