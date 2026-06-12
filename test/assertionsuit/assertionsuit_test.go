@@ -9,18 +9,18 @@ import (
 )
 
 func Test_AssertionSuit_Assert_returnsAssertion(t *testing.T) {
-	assertType[*assertion.Assertion[any]](t, newSuit(t).Assert("hello"))
+	assertType[*assertion.Assertion[any]](t, newSuit().Assert("hello"))
 }
 
 func Test_AssertionSuit_AssertBool_returnsBoolAssertion(t *testing.T) {
-	assertType[*assertion.BoolAssertion](t, newSuit(t).AssertBool(true))
+	assertType[*assertion.BoolAssertion](t, newSuit().AssertBool(true))
 }
 
 func Test_AssertionSuit_AssertSlice_returnsSliceAssertion(t *testing.T) {
-	assertType[*assertion.SliceAssertion[any]](t, newSuit(t).AssertSlice([]any{1, 2, 3}))
+	assertType[*assertion.SliceAssertion[any]](t, newSuit().AssertSlice([]any{1, 2, 3}))
 }
 
-func newSuit(t *testing.T) *assertionsuit.AssertionSuit {
+func newSuit() *assertionsuit.AssertionSuit {
 	_, s := agtest.NewSink()
 	return assertionsuit.New(s)
 }
