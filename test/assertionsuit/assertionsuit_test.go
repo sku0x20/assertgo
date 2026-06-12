@@ -24,6 +24,10 @@ func Test_AssertionSuit_AssertFloat_returnsNumberAssertion(t *testing.T) {
 	assertType[*assertion.NumberAssertion[float64]](t, newSuit().AssertFloat(3.14))
 }
 
+func Test_AssertionSuit_AssertType_returnsTypeAssertion(t *testing.T) {
+	assertType[*assertion.TypeAssertion](t, newSuit().AssertType(42))
+}
+
 func Test_AssertionSuit_AssertSlice_returnsSliceAssertion(t *testing.T) {
 	assertType[*assertion.SliceAssertion[any]](t, newSuit().AssertSlice([]any{1, 2, 3}))
 }
