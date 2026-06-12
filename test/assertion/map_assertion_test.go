@@ -32,6 +32,12 @@ func Test_MapAssertion_IsEmpty(t *testing.T) {
 	})
 }
 
+func Test_MapAssertion_ContainsNoneEntries(t *testing.T) {
+	assertMapPasses(t, map[string]int{"a": 1, "b": 2}, func(a *assertion.MapAssertion[string, int]) {
+		a.ContainsNoneEntries(map[string]int{"c": 3})
+	})
+}
+
 func Test_MapAssertion_Not(t *testing.T) {
 	assertMapPasses(t, map[string]int{"a": 1}, func(a *assertion.MapAssertion[string, int]) {
 		a.Not().EqualTo(map[string]int{"a": 2})
