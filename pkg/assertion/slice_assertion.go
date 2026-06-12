@@ -19,6 +19,11 @@ func NewSlice[E any](ma *matcherasserter.MatcherAsserter[[]E]) *SliceAssertion[E
 	}
 }
 
+func (a *SliceAssertion[E]) Not() *SliceAssertion[E] {
+	a.asserter.Chain(matcher.NewNotMatcher[[]E](nil))
+	return a
+}
+
 func (a *SliceAssertion[E]) WithComparator(c comparator.Comparator[E]) *SliceAssertion[E] {
 	a.comparator = c
 	return a
