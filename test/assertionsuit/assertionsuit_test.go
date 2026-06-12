@@ -16,8 +16,8 @@ func Test_AssertionSuit_AssertBool_returnsBoolAssertion(t *testing.T) {
 	assertType[*assertion.BoolAssertion](t, newSuit().AssertBool(true))
 }
 
-func Test_AssertionSuit_AssertNumber_returnsNumberAssertion(t *testing.T) {
-	assertType[*assertion.NumberAssertion[int]](t, newSuit().AssertNumber(10))
+func Test_AssertionSuit_AssertInt_returnsNumberAssertion(t *testing.T) {
+	assertType[*assertion.NumberAssertion[int]](t, newSuit().AssertInt(10))
 }
 
 func Test_AssertionSuit_AssertSlice_returnsSliceAssertion(t *testing.T) {

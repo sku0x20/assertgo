@@ -29,6 +29,6 @@ func (a *AssertionSuit) AssertBool(value bool) *assertion.BoolAssertion {
 }
 
 // todo: use generic method in golang 1.27
-func (a *AssertionSuit) AssertNumber(value int) *assertion.NumberAssertion[int] {
+func (a *AssertionSuit) AssertInt(value int) *assertion.NumberAssertion[int] {
 	return assertion.NewNumber[int](matcherasserter.New(a.sink, value))
 }
