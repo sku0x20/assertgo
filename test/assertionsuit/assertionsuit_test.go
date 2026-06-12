@@ -24,6 +24,10 @@ func Test_AssertionSuit_AssertFloat_returnsNumberAssertion(t *testing.T) {
 	assertType[*assertion.NumberAssertion[float64]](t, newSuit().AssertFloat(3.14))
 }
 
+func Test_AssertionSuit_AssertMap_returnsMapAssertion(t *testing.T) {
+	assertType[*assertion.MapAssertion[any, any]](t, newSuit().AssertMap(map[any]any{"a": 1}))
+}
+
 func Test_AssertionSuit_AssertType_returnsTypeAssertion(t *testing.T) {
 	assertType[*assertion.TypeAssertion](t, newSuit().AssertType(42))
 }
