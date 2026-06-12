@@ -20,7 +20,4 @@ func (a *TypeAssertion) IsType(expected reflect.Type) *TypeAssertion {
 	return a
 }
 
-// todo: replace with Is[T any]() method once Go supports generic methods
-func Is[T any](a *TypeAssertion) *TypeAssertion {
-	return a.IsType(reflect.TypeOf(*new(T)))
-}
+// todo: add Is[T any]() method once Go supports generic methods
