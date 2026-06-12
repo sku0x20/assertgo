@@ -9,27 +9,25 @@ import (
 )
 
 func Test_AssertionSuit_Assert_returnsAssertion(t *testing.T) {
-	var result any = newSuit(t).Assert("hello")
-	if _, ok := result.(*assertion.Assertion[any]); !ok {
-		t.Fatal("expected *assertion.Assertion[any]")
-	}
+	assertType[*assertion.Assertion[any]](t, newSuit(t).Assert("hello"))
 }
 
 func Test_AssertionSuit_AssertBool_returnsBoolAssertion(t *testing.T) {
-	var result any = newSuit(t).AssertBool(true)
-	if _, ok := result.(*assertion.BoolAssertion); !ok {
-		t.Fatal("expected *assertion.BoolAssertion")
-	}
+	assertType[*assertion.BoolAssertion](t, newSuit(t).AssertBool(true))
 }
 
 func Test_AssertionSuit_AssertSlice_returnsSliceAssertion(t *testing.T) {
-	var result any = newSuit(t).AssertSlice([]any{1, 2, 3})
-	if _, ok := result.(*assertion.SliceAssertion[any]); !ok {
-		t.Fatal("expected *assertion.SliceAssertion[any]")
-	}
+	assertType[*assertion.SliceAssertion[any]](t, newSuit(t).AssertSlice([]any{1, 2, 3}))
 }
 
 func newSuit(t *testing.T) *assertionsuit.AssertionSuit {
 	_, s := agtest.NewSink()
 	return assertionsuit.New(s)
+}
+
+func assertType[T any](t *testing.T, value any) {
+	t.Helper()
+	if _, ok := value.(T); !ok {
+		t.Fatalf("expected %T", *new(T))
+	}
 }
