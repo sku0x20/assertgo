@@ -6,6 +6,7 @@ import (
 	"github.com/sku0x20/assertgo/pkg/assertion"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 	agtest "github.com/sku0x20/assertgo/test"
+	testcomparator "github.com/sku0x20/assertgo/test/comparator"
 	testmatcher "github.com/sku0x20/assertgo/test/matcher"
 )
 
@@ -24,6 +25,18 @@ func Test_Assertion_IsNil(t *testing.T) {
 
 func Test_Assertion_Matches(t *testing.T) {
 	assertPasses(t, "hello", func(a *assertion.Assertion[any]) { a.Matches(&testmatcher.MockMatcher{MatchResult: true}) })
+}
+
+func Test_Assertion_WithComparator_Pass(t *testing.T) {
+	assert(t, "hello", false, func(a *assertion.Assertion[any]) {
+		a.WithComparator(&testcomparator.MockComparator[any]{Result: 0}).EqualTo("hello")
+	})
+}
+
+func Test_Assertion_WithComparator_Fail(t *testing.T) {
+	assert(t, "hello", true, func(a *assertion.Assertion[any]) {
+		a.WithComparator(&testcomparator.MockComparator[any]{Result: -1}).EqualTo("hello")
+	})
 }
 
 func Test_Assertion_Not(t *testing.T) {
