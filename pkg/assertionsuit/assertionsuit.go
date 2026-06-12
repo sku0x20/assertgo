@@ -38,6 +38,11 @@ func (a *AssertionSuit) AssertFloat(value float64) *assertion.NumberAssertion[fl
 	return assertion.NewNumber[float64](matcherasserter.New(a.sink, value))
 }
 
+// todo: use generic method in golang 1.27
+func (a *AssertionSuit) AssertMap(value map[any]any) *assertion.MapAssertion[any, any] {
+	return assertion.NewMap[any, any](matcherasserter.New(a.sink, value))
+}
+
 func (a *AssertionSuit) AssertType(value any) *assertion.TypeAssertion {
 	return assertion.NewType(matcherasserter.New(a.sink, value))
 }
