@@ -5,7 +5,7 @@ import (
 	"github.com/sku0x20/assertgo/pkg/constraints"
 	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
-	numbermatcher "github.com/sku0x20/assertgo/pkg/matcher/number"
+	
 )
 
 type NumberAssertion[V constraints.Number] struct {
@@ -36,26 +36,26 @@ func (a *NumberAssertion[V]) EqualTo(other V) *NumberAssertion[V] {
 }
 
 func (a *NumberAssertion[V]) GreaterThan(other V) *NumberAssertion[V] {
-	a.asserter.Assert(numbermatcher.NewGreaterThanMatcher(other, a.comparator))
+	a.asserter.Assert(matcher.NewGreaterThanMatcher(other, a.comparator))
 	return a
 }
 
 func (a *NumberAssertion[V]) GreaterThanOrEqual(other V) *NumberAssertion[V] {
-	a.asserter.Assert(numbermatcher.NewGreaterThanOrEqualMatcher(other, a.comparator))
+	a.asserter.Assert(matcher.NewGreaterThanOrEqualMatcher(other, a.comparator))
 	return a
 }
 
 func (a *NumberAssertion[V]) LessThan(other V) *NumberAssertion[V] {
-	a.asserter.Assert(numbermatcher.NewLessThanMatcher(other, a.comparator))
+	a.asserter.Assert(matcher.NewLessThanMatcher(other, a.comparator))
 	return a
 }
 
 func (a *NumberAssertion[V]) LessThanOrEqual(other V) *NumberAssertion[V] {
-	a.asserter.Assert(numbermatcher.NewLessThanOrEqualMatcher(other, a.comparator))
+	a.asserter.Assert(matcher.NewLessThanOrEqualMatcher(other, a.comparator))
 	return a
 }
 
 func (a *NumberAssertion[V]) InRange(min, max V) *NumberAssertion[V] {
-	a.asserter.Assert(numbermatcher.NewInRangeMatcher(min, max, a.comparator))
+	a.asserter.Assert(matcher.NewInRangeMatcher(min, max, a.comparator))
 	return a
 }

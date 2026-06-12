@@ -1,18 +1,17 @@
-package number
+package matcher
 
 import (
 	"fmt"
 
 	"github.com/sku0x20/assertgo/pkg/comparator"
-	"github.com/sku0x20/assertgo/pkg/constraints"
 )
 
-type LessThanOrEqualMatcher[V constraints.Number] struct {
+type LessThanOrEqualMatcher[V any] struct {
 	other      V
 	comparator comparator.Comparator[V]
 }
 
-func NewLessThanOrEqualMatcher[V constraints.Number](other V, c comparator.Comparator[V]) *LessThanOrEqualMatcher[V] {
+func NewLessThanOrEqualMatcher[V any](other V, c comparator.Comparator[V]) *LessThanOrEqualMatcher[V] {
 	return &LessThanOrEqualMatcher[V]{other: other, comparator: c}
 }
 
