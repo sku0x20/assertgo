@@ -30,6 +30,11 @@ func (a *NumberAssertion[V]) WithComparator(c comparator.Comparator[V]) *NumberA
 	return a
 }
 
+func (a *NumberAssertion[V]) EqualTo(other V) *NumberAssertion[V] {
+	a.asserter.Assert(matcher.NewEqualMatcher(other, a.comparator))
+	return a
+}
+
 func (a *NumberAssertion[V]) GreaterThan(other V) *NumberAssertion[V] {
 	a.asserter.Assert(numbermatcher.NewGreaterThanMatcher(other, a.comparator))
 	return a
