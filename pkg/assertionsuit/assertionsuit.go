@@ -33,6 +33,11 @@ func (a *AssertionSuit) AssertInt(value int) *assertion.NumberAssertion[int] {
 	return assertion.NewNumber[int](matcherasserter.New(a.sink, value))
 }
 
+// todo: use generic method in golang 1.27
+func (a *AssertionSuit) AssertFloat(value float64) *assertion.NumberAssertion[float64] {
+	return assertion.NewNumber[float64](matcherasserter.New(a.sink, value))
+}
+
 func (a *AssertionSuit) AssertType(value any) *assertion.TypeAssertion {
 	return assertion.NewType(matcherasserter.New(a.sink, value))
 }
