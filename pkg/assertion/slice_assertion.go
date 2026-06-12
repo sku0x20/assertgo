@@ -49,6 +49,11 @@ func (a *SliceAssertion[E]) ContainsAll(elements []E) *SliceAssertion[E] {
 	return a
 }
 
+func (a *SliceAssertion[E]) IsUnique() *SliceAssertion[E] {
+	a.asserter.Assert(slicematcher.NewUniqueMatcher(a.comparator))
+	return a
+}
+
 func (a *SliceAssertion[E]) ContainsNone(elements []E) *SliceAssertion[E] {
 	a.asserter.Assert(matcher.NewNotMatcher[[]E](slicematcher.NewContainsAllMatcher(elements, a.comparator)))
 	return a
