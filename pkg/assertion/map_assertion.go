@@ -47,3 +47,8 @@ func (a *MapAssertion[K, V]) HasLength(length int) *MapAssertion[K, V] {
 func (a *MapAssertion[K, V]) IsEmpty() *MapAssertion[K, V] {
 	return a.HasLength(0)
 }
+
+func (a *MapAssertion[K, V]) ContainsNoneEntries(entries map[K]V) *MapAssertion[K, V] {
+	a.asserter.Assert(matcher.NewNotMatcher[map[K]V](map_matcher.NewContainsAllEntriesMatcher(entries, a.comparator)))
+	return a
+}
