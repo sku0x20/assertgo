@@ -1,6 +1,7 @@
 package assertion
 
 import (
+	"github.com/sku0x20/assertgo/pkg/comparator"
 	"github.com/sku0x20/assertgo/pkg/matcher"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 )
@@ -19,7 +20,7 @@ func (a *Assertion[V]) Not() *Assertion[V] {
 }
 
 func (a *Assertion[V]) EqualTo(other V) *Assertion[V] {
-	a.asserter.Assert(matcher.NewDeepEqualMatcher(other))
+	a.asserter.Assert(matcher.NewEqualMatcher(other, comparator.NewDeepReflectComparator[V]()))
 	return a
 }
 
