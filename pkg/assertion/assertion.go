@@ -7,11 +7,15 @@ import (
 )
 
 type Assertion[V any] struct {
-	asserter *matcherasserter.MatcherAsserter[V]
+	asserter   *matcherasserter.MatcherAsserter[V]
+	comparator comparator.Comparator[V]
 }
 
 func New[V any](ma *matcherasserter.MatcherAsserter[V]) *Assertion[V] {
-	return &Assertion[V]{asserter: ma}
+	return &Assertion[V]{
+		asserter:   ma,
+		comparator: comparator.NewDeepReflectComparator[V](),
+	}
 }
 
 func (a *Assertion[V]) Not() *Assertion[V] {
@@ -20,7 +24,7 @@ func (a *Assertion[V]) Not() *Assertion[V] {
 }
 
 func (a *Assertion[V]) EqualTo(other V) *Assertion[V] {
-	a.asserter.Assert(matcher.NewEqualMatcher(other, comparator.NewDeepReflectComparator[V]()))
+	a.asserter.Assert(matcher.NewEqualMatcher(other, a.comparator))
 	return a
 }
 
