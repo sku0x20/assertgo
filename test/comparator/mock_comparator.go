@@ -1,4 +1,4 @@
-package matcher
+package comparator
 
 type MockComparator[V any] struct {
 	Result int
