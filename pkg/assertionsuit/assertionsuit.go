@@ -23,3 +23,7 @@ func (a *AssertionSuit) Assert(value any) *assertion.Assertion[any] {
 func (a *AssertionSuit) AssertSlice(value []any) *assertion.SliceAssertion[any] {
 	return assertion.NewSlice[any](matcherasserter.New(a.sink, value))
 }
+
+func (a *AssertionSuit) AssertBool(value bool) *assertion.BoolAssertion {
+	return assertion.NewBool(matcherasserter.New(a.sink, value))
+}
