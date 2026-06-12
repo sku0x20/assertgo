@@ -1,4 +1,4 @@
-package equal
+package matcher
 
 import "fmt"
 
