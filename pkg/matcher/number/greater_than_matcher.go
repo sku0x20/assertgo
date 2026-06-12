@@ -1,4 +1,4 @@
-package integer
+package number
 
 import (
 	"fmt"
@@ -7,12 +7,12 @@ import (
 	"github.com/sku0x20/assertgo/pkg/constraints"
 )
 
-type GreaterThanMatcher[V constraints.Integer] struct {
+type GreaterThanMatcher[V constraints.Number] struct {
 	other      V
 	comparator comparator.Comparator[V]
 }
 
-func NewGreaterThanMatcher[V constraints.Integer](other V, c comparator.Comparator[V]) *GreaterThanMatcher[V] {
+func NewGreaterThanMatcher[V constraints.Number](other V, c comparator.Comparator[V]) *GreaterThanMatcher[V] {
 	return &GreaterThanMatcher[V]{other: other, comparator: c}
 }
 

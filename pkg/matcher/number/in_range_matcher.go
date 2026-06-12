@@ -1,4 +1,4 @@
-package integer
+package number
 
 import (
 	"fmt"
@@ -7,12 +7,12 @@ import (
 	"github.com/sku0x20/assertgo/pkg/constraints"
 )
 
-type InRangeMatcher[V constraints.Integer] struct {
+type InRangeMatcher[V constraints.Number] struct {
 	min, max   V
 	comparator comparator.Comparator[V]
 }
 
-func NewInRangeMatcher[V constraints.Integer](min, max V, c comparator.Comparator[V]) *InRangeMatcher[V] {
+func NewInRangeMatcher[V constraints.Number](min, max V, c comparator.Comparator[V]) *InRangeMatcher[V] {
 	return &InRangeMatcher[V]{min: min, max: max, comparator: c}
 }
 
