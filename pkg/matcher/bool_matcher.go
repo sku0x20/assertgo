@@ -14,6 +14,6 @@ func (b *BoolMatcher) Match(value bool) bool {
 	return value == b.expected
 }
 
-func (b *BoolMatcher) FailureMsg(value bool) string {
-	return fmt.Sprintf("expected %v but got %v", b.expected, value)
+func (b *BoolMatcher) FailureMsg(_ bool) string {
+	return fmt.Sprintf("expected %v", b.expected)
 }
