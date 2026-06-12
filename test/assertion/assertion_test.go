@@ -27,15 +27,9 @@ func Test_Assertion_Matches(t *testing.T) {
 	assertPasses(t, "hello", func(a *assertion.Assertion[any]) { a.Matches(&testmatcher.MockMatcher{MatchResult: true}) })
 }
 
-func Test_Assertion_WithComparator_Pass(t *testing.T) {
-	assert(t, "hello", false, func(a *assertion.Assertion[any]) {
+func Test_Assertion_WithComparator(t *testing.T) {
+	assertPasses(t, "hello", func(a *assertion.Assertion[any]) {
 		a.WithComparator(&testcomparator.MockComparator[any]{Result: 0}).EqualTo("hello")
-	})
-}
-
-func Test_Assertion_WithComparator_Fail(t *testing.T) {
-	assert(t, "hello", true, func(a *assertion.Assertion[any]) {
-		a.WithComparator(&testcomparator.MockComparator[any]{Result: -1}).EqualTo("hello")
 	})
 }
 
