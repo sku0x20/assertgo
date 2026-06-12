@@ -32,3 +32,7 @@ func (a *AssertionSuit) AssertBool(value bool) *assertion.BoolAssertion {
 func (a *AssertionSuit) AssertInt(value int) *assertion.NumberAssertion[int] {
 	return assertion.NewNumber[int](matcherasserter.New(a.sink, value))
 }
+
+func (a *AssertionSuit) AssertType(value any) *assertion.TypeAssertion {
+	return assertion.NewType(matcherasserter.New(a.sink, value))
+}
