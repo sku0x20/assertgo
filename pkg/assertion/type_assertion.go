@@ -19,3 +19,8 @@ func (a *TypeAssertion) IsType(expected reflect.Type) *TypeAssertion {
 	a.asserter.Assert(matcher.NewReflectTypeMatcher(expected))
 	return a
 }
+
+// todo: replace with Is[T any]() method once Go supports generic methods
+func Is[T any](a *TypeAssertion) *TypeAssertion {
+	return a.IsType(reflect.TypeOf(*new(T)))
+}
