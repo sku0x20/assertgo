@@ -10,7 +10,7 @@ import (
 	testmatcher "github.com/sku0x20/assertgo/test/matcher"
 )
 
-func Test_Assertion_EqualTo(t *testing.T) {
+func Test_Assertion_WithComparator_EqualTo(t *testing.T) {
 	assertPasses(t, "hello", func(a *assertion.Assertion[any]) {
 		a.WithComparator(&testcomparator.MockComparator[any]{Result: 0}).EqualTo("hello")
 	})
