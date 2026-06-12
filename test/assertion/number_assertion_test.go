@@ -8,6 +8,10 @@ import (
 	agtest "github.com/sku0x20/assertgo/test"
 )
 
+func Test_NumberAssertion_EqualTo(t *testing.T) {
+	assertNumberPasses(t, 10, func(a *assertion.NumberAssertion[int]) { a.EqualTo(10) })
+}
+
 func Test_NumberAssertion_GreaterThan(t *testing.T) {
 	assertNumberPasses(t, 10, func(a *assertion.NumberAssertion[int]) { a.GreaterThan(5) })
 }
