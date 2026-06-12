@@ -11,7 +11,9 @@ import (
 )
 
 func Test_Assertion_EqualTo(t *testing.T) {
-	assertPasses(t, "hello", func(a *assertion.Assertion[any]) { a.EqualTo("hello") })
+	assertPasses(t, "hello", func(a *assertion.Assertion[any]) {
+		a.WithComparator(&testcomparator.MockComparator[any]{Result: 0}).EqualTo("hello")
+	})
 }
 
 func Test_Assertion_SameAs(t *testing.T) {
@@ -25,12 +27,6 @@ func Test_Assertion_IsNil(t *testing.T) {
 
 func Test_Assertion_Matches(t *testing.T) {
 	assertPasses(t, "hello", func(a *assertion.Assertion[any]) { a.Matches(&testmatcher.MockMatcher{MatchResult: true}) })
-}
-
-func Test_Assertion_WithComparator(t *testing.T) {
-	assertPasses(t, "hello", func(a *assertion.Assertion[any]) {
-		a.WithComparator(&testcomparator.MockComparator[any]{Result: 0}).EqualTo("hello")
-	})
 }
 
 func Test_Assertion_Not(t *testing.T) {
