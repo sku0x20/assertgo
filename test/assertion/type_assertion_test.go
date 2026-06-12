@@ -11,7 +11,7 @@ import (
 
 func Test_TypeAssertion_IsType(t *testing.T) {
 	mock, s := agtest.NewSink()
-	a := assertion.NewType(matcherasserter.New(s, 42))
+	a := assertion.NewType(matcherasserter.New(s, any(42)))
 	a.IsType(reflect.TypeOf(0))
 	if mock.FatalCalled {
 		t.Fatal("expected no failure")
