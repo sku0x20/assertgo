@@ -2,6 +2,7 @@ package assertionsuit
 
 import (
 	"github.com/sku0x20/assertgo/pkg/assertion"
+	"github.com/sku0x20/assertgo/pkg/constraints"
 	"github.com/sku0x20/assertgo/pkg/matcherasserter"
 	"github.com/sku0x20/assertgo/pkg/sink"
 )
@@ -26,9 +27,8 @@ func (a *AssertionSuit) AssertBool(value bool) *assertion.BoolAssertion {
 	return assertion.NewBool(matcherasserter.New(a.sink, value))
 }
 
-// todo: use generic method in golang 1.27
-func (a *AssertionSuit) AssertInt(value int) *assertion.NumberAssertion[int] {
-	return assertion.NewNumber[int](matcherasserter.New(a.sink, value))
+func (a *AssertionSuit) AssertInt[T constraints.Integer](value T) *assertion.NumberAssertion[T] {
+	return assertion.NewNumber[T](matcherasserter.New(a.sink, value))
 }
 
 // todo: use generic method in golang 1.27
