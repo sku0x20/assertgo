@@ -21,3 +21,12 @@ func Test_TypeAssertion_IsType(t *testing.T) {
 		t.Fatal("expected no failure")
 	}
 }
+
+func Test_TypeAssertion_Is(t *testing.T) {
+	mock, s := agtest.NewSink()
+	a := assertion.NewType(matcherasserter.New(s, any(42)))
+	a.Is[int]()
+	if mock.FatalCalled {
+		t.Fatal("expected no failure")
+	}
+}
