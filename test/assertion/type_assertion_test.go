@@ -10,7 +10,7 @@ import (
 )
 
 func typeOf[T any]() reflect.Type {
-	return reflect.TypeOf(*new(T))
+	return reflect.TypeOf((*T)(nil)).Elem()
 }
 
 func Test_TypeAssertion_IsType(t *testing.T) {
