@@ -9,7 +9,7 @@ import (
 )
 
 func Test_AssertionSuit_Assert_returnsAssertion(t *testing.T) {
-	assertType[*assertion.Assertion[any]](t, newSuit().Assert("hello"))
+	assertType[*assertion.Assertion[string]](t, newSuit().Assert("hello"))
 }
 
 func Test_AssertionSuit_AssertBool_returnsBoolAssertion(t *testing.T) {
