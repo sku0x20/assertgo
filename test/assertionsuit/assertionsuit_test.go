@@ -25,7 +25,7 @@ func Test_AssertionSuit_AssertFloat_returnsNumberAssertion(t *testing.T) {
 }
 
 func Test_AssertionSuit_AssertMap_returnsMapAssertion(t *testing.T) {
-	assertType[*assertion.MapAssertion[any, any]](t, newSuit().AssertMap(map[any]any{"a": 1}))
+	assertType[*assertion.MapAssertion[string, int]](t, newSuit().AssertMap(map[string]int{"a": 1}))
 }
 
 func Test_AssertionSuit_AssertString_returnsStringAssertion(t *testing.T) {
