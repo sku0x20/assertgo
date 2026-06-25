@@ -31,15 +31,16 @@ func TestSomething(t *testing.T) {
     T(t).AssertString("hello").HasSuffix("llo")
     T(t).AssertString("hello123").MatchesRegex(`^\w+\d+$`)
 
-    T(t).AssertSlice([]any{1, 2, 3}).HasLength(3)
-    T(t).AssertSlice([]any{1, 2, 3}).ContainsAll([]any{1, 3})
-    T(t).AssertSlice([]any{1, 2, 3}).Not().ContainsAll([]any{4, 5})
-    T(t).AssertSlice([]any{1, 2, 3}).IsUnique()
+    T(t).AssertSlice([]int{1, 2, 3}).HasLength(3)
+    T(t).AssertSlice([]int{1, 2, 3}).ContainsAll([]int{1, 3})
+    T(t).AssertSlice([]int{1, 2, 3}).Not().ContainsAll([]int{4, 5})
+    T(t).AssertSlice([]int{1, 2, 3}).IsUnique()
 
-    T(t).AssertMap(map[any]any{"a": 1}).HasLength(1)
-    T(t).AssertMap(map[any]any{"a": 1, "b": 2}).ContainsAllEntries(map[any]any{"a": 1})
+    T(t).AssertMap(map[string]int{"a": 1}).HasLength(1)
+    T(t).AssertMap(map[string]int{"a": 1, "b": 2}).ContainsAllEntries(map[string]int{"a": 1})
 
     T(t).AssertType(42).IsType(reflect.TypeOf(0))
+    T(t).AssertType(42).Is[int]()
 }
 ```
 
