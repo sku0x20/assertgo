@@ -19,8 +19,8 @@ func (a *AssertionSuit) Assert[T any](value T) *assertion.Assertion[T] {
 	return assertion.New(matcherasserter.New(a.sink, value))
 }
 
-func (a *AssertionSuit) AssertSlice(value []any) *assertion.SliceAssertion[any] {
-	return assertion.NewSlice[any](matcherasserter.New(a.sink, value))
+func (a *AssertionSuit) AssertSlice[T any](value []T) *assertion.SliceAssertion[T] {
+	return assertion.NewSlice[T](matcherasserter.New(a.sink, value))
 }
 
 func (a *AssertionSuit) AssertBool(value bool) *assertion.BoolAssertion {

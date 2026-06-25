@@ -37,7 +37,7 @@ func Test_AssertionSuit_AssertType_returnsTypeAssertion(t *testing.T) {
 }
 
 func Test_AssertionSuit_AssertSlice_returnsSliceAssertion(t *testing.T) {
-	assertType[*assertion.SliceAssertion[any]](t, newSuit().AssertSlice([]any{1, 2, 3}))
+	assertType[*assertion.SliceAssertion[int]](t, newSuit().AssertSlice([]int{1, 2, 3}))
 }
 
 func newSuit() *assertionsuit.AssertionSuit {
