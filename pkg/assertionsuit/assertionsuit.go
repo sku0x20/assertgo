@@ -35,9 +35,8 @@ func (a *AssertionSuit) AssertFloat[T constraints.Float](value T) *assertion.Num
 	return assertion.NewNumber[T](matcherasserter.New(a.sink, value))
 }
 
-// todo: use generic method in golang 1.27
-func (a *AssertionSuit) AssertMap(value map[any]any) *assertion.MapAssertion[any, any] {
-	return assertion.NewMap[any, any](matcherasserter.New(a.sink, value))
+func (a *AssertionSuit) AssertMap[K comparable, V any](value map[K]V) *assertion.MapAssertion[K, V] {
+	return assertion.NewMap[K, V](matcherasserter.New(a.sink, value))
 }
 
 func (a *AssertionSuit) AssertString(value string) *assertion.StringAssertion {
