@@ -18,4 +18,4 @@
 
 - **Plan before vague/architectural tasks:** If a request lacks specifics on *how* to do something (e.g. "refactor", "restructure"), present a plan and wait for approval before making any changes.
 - **No unprompted TODO analysis:** Don't summarize TODOs or propose next steps unless explicitly asked.
-- **Don't run broad commands:** Do not run commands like `go test ./...`, `go build ./...`, or any other broad/expensive shell commands. Instead, tell the user what command to run and ask them to run it.
+- **Broad commands are fine, but stop after reporting:** You may run commands like `go test ./...`, `go build ./...`, or other broad/expensive shell commands. Report the result (pass/fail, errors found) and stop — do NOT start fixing failures or issues on your own. Keep the feedback loop small: run, report, wait for the user's direction before making further changes.
